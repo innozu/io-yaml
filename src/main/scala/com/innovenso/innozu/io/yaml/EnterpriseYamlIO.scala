@@ -53,7 +53,9 @@ object EnterpriseYamlIO extends YamlIO {
       ea describes Enterprise(
         key = key,
         sortKey = readSortKey(data)
-      ) as { it => }
+      ) as { it =>
+        it has TitleYamlIO.read(data)
+      }
     }
   )
 }

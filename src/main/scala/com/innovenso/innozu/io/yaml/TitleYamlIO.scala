@@ -12,4 +12,7 @@ object TitleYamlIO extends YamlIO {
     debug(s"writing title ${hasTitle.title.value}")
     data.put("title", hasTitle.title.value)
   }
+
+  def read(data: YamlJavaData): Title =
+    readString(data, "title").map(t => Title(t)).getOrElse(Title(""))
 }
