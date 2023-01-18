@@ -53,7 +53,7 @@ class YamlDeserializationSpec extends AnyFlatSpec {
         |  - This is a business capability
         |- key: capability_2
         |  title: Business Capability 2
-        |  Tolerate: This capability should be tolerated
+        |  tolerate: This capability should be tolerated
         |""".stripMargin
     val data: YamlJavaData = yaml.load(yml).asInstanceOf[YamlJavaData]
     println(data)

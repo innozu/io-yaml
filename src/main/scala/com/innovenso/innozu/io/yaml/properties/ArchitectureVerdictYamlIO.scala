@@ -23,7 +23,7 @@ object ArchitectureVerdictYamlIO
     )
     if (!hasArchitectureVerdict.isUnknownArchitectureVerdict) {
       data.put(
-        hasArchitectureVerdict.architectureVerdict.name,
+        hasArchitectureVerdict.architectureVerdict.name.toLowerCase,
         hasArchitectureVerdict.architectureVerdict.description
       )
     }
@@ -35,9 +35,13 @@ object ArchitectureVerdictYamlIO
   override def readOne(
       data: ArchitectureVerdictYamlIO.YamlJavaData
   ): Option[ArchitectureVerdict] =
-    readString(data, BeTolerated().name)
+    readString(data, BeTolerated().name.toLowerCase)
       .map(BeTolerated)
-      .orElse(readString(data, BeInvestedIn().name).map(BeInvestedIn))
-      .orElse(readString(data, BeMigrated().name).map(BeMigrated))
-      .orElse(readString(data, BeEliminated().name).map(BeEliminated))
+      .orElse(
+        readString(data, BeInvestedIn().name.toLowerCase).map(BeInvestedIn)
+      )
+      .orElse(readString(data, BeMigrated().name.toLowerCase).map(BeMigrated))
+      .orElse(
+        readString(data, BeEliminated().name.toLowerCase).map(BeEliminated)
+      )
 }
