@@ -3,7 +3,11 @@ package com.innovenso.innozu.io.yaml
 import fish.genius.logging.Loggable
 
 import scala.collection.mutable
-import scala.jdk.CollectionConverters.{MapHasAsScala, MutableMapHasAsJava}
+import scala.jdk.CollectionConverters.{
+  ListHasAsScala,
+  MapHasAsScala,
+  MutableMapHasAsJava
+}
 
 trait YamlIO extends Loggable {
   type YamlData = mutable.LinkedHashMap[String, Any]
@@ -26,5 +30,33 @@ trait YamlIO extends Loggable {
       case _ =>
         debug(s"no entry found with key $key")
         None
+    }
+
+  def readStrings(data: YamlJavaData, key: String): List[String] =
+    data.asScala match {
+      case v if v.get(key).exists(kv => kv.isInstanceOf[java.util.List[_]]) =>
+        val theList = v(key).asInstanceOf[java.util.List[_]]
+        debug(s"reading list  of strings with key $key: $theList")
+        theList.asScala
+          .filter(_.isInstanceOf[String])
+          .map(_.asInstanceOf[String])
+          .toList
+      case _ =>
+        debug(s"no entry found with key $key")
+        Nil
+    }
+
+  def readMaps(data: YamlJavaData, key: String): List[YamlJavaData] =
+    data.asScala match {
+      case v if v.get(key).exists(kv => kv.isInstanceOf[java.util.List[_]]) =>
+        val theList = v(key).asInstanceOf[java.util.List[_]]
+        debug(s"reading list of maps with key $key: $theList")
+        theList.asScala
+          .filter(_.isInstanceOf[YamlJavaData])
+          .map(_.asInstanceOf[YamlJavaData])
+          .toList
+      case _ =>
+        debug(s"no entry found with key $key")
+        Nil
     }
 }

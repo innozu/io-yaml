@@ -23,6 +23,7 @@ object EnterpriseYamlIO extends YamlIO {
       ModelComponentYamlIO.write(enterprise, map)
       TitleYamlIO.write(enterprise, map)
       DescriptionYamlIO.write(enterprise, map)
+      LinksYamlIO.write(enterprise, map)
     }
 
   def write(enterprises: List[Enterprise]): YamlJavaData =
@@ -55,6 +56,8 @@ object EnterpriseYamlIO extends YamlIO {
         sortKey = readSortKey(data)
       ) as { it =>
         it has TitleYamlIO.read(data)
+        DescriptionYamlIO.read(data).foreach(d => it has d)
+        LinksYamlIO.readLinks(data).foreach(l => it has l)
       }
     }
   )

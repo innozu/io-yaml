@@ -19,6 +19,13 @@ class YamlDeserializationSpec extends AnyFlatSpec {
         |  description:
         |  - this is Enterprise Two
         |  - it has twice as many descriptions as Enterprise One
+        |  links:
+        |  - type: Website
+        |    url: https://innovenso.com
+        |    title: Innovenso Website
+        |  - type: API Documentation
+        |    url: https://innozu.cloud
+        |    title: Innozu API Documentation
         |""".stripMargin
 
     val data: YamlJavaData = yaml.load(yml).asInstanceOf[YamlJavaData]

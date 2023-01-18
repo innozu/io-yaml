@@ -1,6 +1,7 @@
 package com.innovenso.innozu.io.yaml
 
 import com.innovenso.townplanner.model.concepts.properties.{
+  Description,
   HasDescription,
   HasTitle
 }
@@ -20,4 +21,7 @@ object DescriptionYamlIO extends YamlIO {
       )
     }
   }
+
+  def read(data: YamlJavaData): List[Description] =
+    readStrings(data, "description").map(s => Description(s))
 }
