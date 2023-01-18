@@ -54,6 +54,11 @@ class YamlDeserializationSpec extends AnyFlatSpec {
         |- key: capability_2
         |  title: Business Capability 2
         |  tolerate: This capability should be tolerated
+        |  externalIds:
+        |    - id: '123'
+        |      system: Sparx Enterprise Architect
+        |    - id: '456'
+        |      system: Confluence
         |""".stripMargin
     val data: YamlJavaData = yaml.load(yml).asInstanceOf[YamlJavaData]
     println(data)
