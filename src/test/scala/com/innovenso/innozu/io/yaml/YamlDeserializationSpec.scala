@@ -1,6 +1,9 @@
 package com.innovenso.innozu.io.yaml
 
-import com.innovenso.innozu.io.yaml.concepts.EnterpriseYamlIO
+import com.innovenso.innozu.io.yaml.concepts.{
+  BusinessCapabilityYamlIO,
+  EnterpriseYamlIO
+}
 import com.innovenso.innozu.io.yaml.properties.TitleYamlIO.YamlJavaData
 import com.innovenso.townplanner.model.concepts.Enterprise
 import org.scalatest.flatspec.AnyFlatSpec
@@ -38,6 +41,23 @@ class YamlDeserializationSpec extends AnyFlatSpec {
     val data: YamlJavaData = yaml.load(yml).asInstanceOf[YamlJavaData]
     println(data)
     EnterpriseYamlIO.read(data)
+    println(townPlan)
+  }
+
+  it should "read business capabilities from YAML" in new EnterpriseArchitectureContext {
+    val yml: String =
+      """capabilities:
+        |- key: capability_1
+        |  title: Business Capability 1
+        |  description:
+        |  - This is a business capability
+        |- key: capability_2
+        |  title: Business Capability 2
+        |  Tolerate: This capability should be tolerated
+        |""".stripMargin
+    val data: YamlJavaData = yaml.load(yml).asInstanceOf[YamlJavaData]
+    println(data)
+    BusinessCapabilityYamlIO.read(data)
     println(townPlan)
   }
 }
