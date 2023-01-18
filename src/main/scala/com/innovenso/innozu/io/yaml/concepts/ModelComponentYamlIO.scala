@@ -1,6 +1,6 @@
-package com.innovenso.innozu.io.yaml
+package com.innovenso.innozu.io.yaml.concepts
 
-import com.innovenso.townplanner.model.concepts.properties.HasTitle
+import com.innovenso.innozu.io.yaml.YamlIO
 import com.innovenso.townplanner.model.language.ModelComponent
 import com.innovenso.townplanner.model.meta.{Key, SortKey}
 

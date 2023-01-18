@@ -52,11 +52,23 @@ trait YamlIO extends Loggable {
         val theList = v(key).asInstanceOf[java.util.List[_]]
         debug(s"reading list of maps with key $key: $theList")
         theList.asScala
-          .filter(_.isInstanceOf[YamlJavaData])
+          .filter(_.isInstanceOf[java.util.Map[_, _]])
           .map(_.asInstanceOf[YamlJavaData])
           .toList
       case _ =>
         debug(s"no entry found with key $key")
         Nil
     }
+
+  def readMap(data: YamlJavaData, key: String): Option[YamlJavaData] =
+    data.asScala match {
+      case v if v.get(key).exists(kv => kv.isInstanceOf[java.util.Map[_, _]]) =>
+        val theMap = v(key).asInstanceOf[YamlJavaData]
+        debug(s"reading map with key $key: $theMap")
+        Some(theMap)
+      case _ =>
+        debug(s"no entry found with key $key")
+        None
+    }
+
 }

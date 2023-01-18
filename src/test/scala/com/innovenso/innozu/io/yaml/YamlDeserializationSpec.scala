@@ -1,6 +1,7 @@
 package com.innovenso.innozu.io.yaml
 
-import com.innovenso.innozu.io.yaml.TitleYamlIO.YamlJavaData
+import com.innovenso.innozu.io.yaml.concepts.EnterpriseYamlIO
+import com.innovenso.innozu.io.yaml.properties.TitleYamlIO.YamlJavaData
 import com.innovenso.townplanner.model.concepts.Enterprise
 import org.scalatest.flatspec.AnyFlatSpec
 
@@ -26,6 +27,12 @@ class YamlDeserializationSpec extends AnyFlatSpec {
         |  - type: API Documentation
         |    url: https://innozu.cloud
         |    title: Innozu API Documentation
+        |  swot:
+        |    strengths:
+        |    - a first strength
+        |    - a second strength
+        |    opportunities:
+        |    - the only opportunity
         |""".stripMargin
 
     val data: YamlJavaData = yaml.load(yml).asInstanceOf[YamlJavaData]

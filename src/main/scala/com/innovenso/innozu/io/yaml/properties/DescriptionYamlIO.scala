@@ -1,15 +1,11 @@
-package com.innovenso.innozu.io.yaml
+package com.innovenso.innozu.io.yaml.properties
 
-import com.innovenso.townplanner.model.concepts.properties.{
-  Description,
-  HasDescription,
-  HasTitle
-}
+import com.innovenso.townplanner.model.concepts.properties.{Description, HasDescription}
 
 import scala.jdk.CollectionConverters.SeqHasAsJava
 
-object DescriptionYamlIO extends YamlIO {
-  def write(
+object DescriptionYamlIO extends YamlPropertiesIO[Description, HasDescription] {
+  override def write(
       hasDescription: HasDescription,
       data: YamlData
   ): Unit = {
@@ -22,6 +18,6 @@ object DescriptionYamlIO extends YamlIO {
     }
   }
 
-  def read(data: YamlJavaData): List[Description] =
+  override def readMany(data: YamlJavaData): List[Description] =
     readStrings(data, "description").map(s => Description(s))
 }

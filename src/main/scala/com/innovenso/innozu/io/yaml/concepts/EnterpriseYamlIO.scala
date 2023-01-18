@@ -1,19 +1,21 @@
-package com.innovenso.innozu.io.yaml
+package com.innovenso.innozu.io.yaml.concepts
 
+import ModelComponentYamlIO.{readSortKey, withKey}
+import com.innovenso.innozu.io.yaml.properties.{
+  DescriptionYamlIO,
+  LinksYamlIO,
+  SWOTYamlIO,
+  TitleYamlIO
+}
+import com.innovenso.innozu.io.yaml.YamlIO
 import com.innovenso.townplanner.model.EnterpriseArchitecture
 import com.innovenso.townplanner.model.concepts.Enterprise
-import com.innovenso.townplanner.model.meta.Key
-import org.yaml.snakeyaml.Yaml
 
-import scala.collection.mutable
-import scala.collection.mutable.LinkedHashMap
 import scala.jdk.CollectionConverters.{
   ListHasAsScala,
   MapHasAsScala,
-  MutableMapHasAsJava,
   SeqHasAsJava
 }
-import ModelComponentYamlIO._
 
 object EnterpriseYamlIO extends YamlIO {
   private val ENTERPRISES = "enterprises"
@@ -24,6 +26,7 @@ object EnterpriseYamlIO extends YamlIO {
       TitleYamlIO.write(enterprise, map)
       DescriptionYamlIO.write(enterprise, map)
       LinksYamlIO.write(enterprise, map)
+      SWOTYamlIO.write(enterprise, map)
     }
 
   def write(enterprises: List[Enterprise]): YamlJavaData =
@@ -56,8 +59,9 @@ object EnterpriseYamlIO extends YamlIO {
         sortKey = readSortKey(data)
       ) as { it =>
         it has TitleYamlIO.read(data)
-        DescriptionYamlIO.read(data).foreach(d => it has d)
-        LinksYamlIO.readLinks(data).foreach(l => it has l)
+        DescriptionYamlIO.readMany(data).foreach(d => it has d)
+        LinksYamlIO.readMany(data).foreach(l => it has l)
+        SWOTYamlIO.readMany(data).foreach(s => it has s)
       }
     }
   )
