@@ -7,6 +7,7 @@ import com.innovenso.innozu.io.yaml.properties.{
   ExternalIdYamlIO,
   LinksYamlIO,
   SWOTYamlIO,
+  TagPropertyYamlIO,
   TitleYamlIO
 }
 import com.innovenso.townplanner.model.EnterpriseArchitecture
@@ -31,5 +32,8 @@ object BusinessCapabilityYamlIO
         ExternalIdYamlIO
           .readMany(data)
           .foreach(i => it isIdentifiedAs i.id on i.externalSystemName)
+        TagPropertyYamlIO
+          .readMany(data)
+          .foreach(tp => ea.townPlan.tag(tp.tagKey).foreach(t => it isTagged t))
     }
 }

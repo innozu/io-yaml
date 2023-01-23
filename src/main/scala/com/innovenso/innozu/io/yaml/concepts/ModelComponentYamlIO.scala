@@ -9,6 +9,7 @@ import com.innovenso.innozu.io.yaml.properties.{
   ExternalIdYamlIO,
   LinksYamlIO,
   SWOTYamlIO,
+  TagPropertyYamlIO,
   TitleYamlIO
 }
 import com.innovenso.townplanner.model.EnterpriseArchitecture
@@ -21,6 +22,7 @@ import com.innovenso.townplanner.model.concepts.properties.{
   HasExternalIds,
   HasLinks,
   HasSWOT,
+  HasTagProperties,
   HasTitle
 }
 import com.innovenso.townplanner.model.language.ModelComponent
@@ -70,6 +72,11 @@ trait ModelComponentYamlIO[ModelComponentType <: ModelComponent]
     modelComponent match {
       case hasExternalIds: HasExternalIds =>
         ExternalIdYamlIO.write(hasExternalIds, map)
+      case _ =>
+    }
+    modelComponent match {
+      case hasTagProperties: HasTagProperties =>
+        TagPropertyYamlIO.write(hasTagProperties, map)
       case _ =>
     }
   }
