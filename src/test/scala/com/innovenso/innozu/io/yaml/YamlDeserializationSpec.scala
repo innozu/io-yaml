@@ -1,6 +1,7 @@
 package com.innovenso.innozu.io.yaml
 
 import com.innovenso.innozu.io.yaml.concepts.{
+  ArchitectureBuildingBlockYamlIO,
   BusinessCapabilityYamlIO,
   EnterpriseYamlIO
 }
@@ -64,5 +65,26 @@ class YamlDeserializationSpec extends AnyFlatSpec {
     println(data)
     BusinessCapabilityYamlIO.read(data)
     println(townPlan)
+  }
+
+  it should "read architecture building blocks from YAML" in new EnterpriseArchitectureContext {
+    val yml: String =
+      """buildingBlocks:
+        |- key: building_block_1
+        |  title: Building Block 1
+        |  criticality:
+        |    level: hazardous
+        |    consequences: Bad things happen
+        |""".stripMargin
+
+    val data: YamlJavaData = yaml.load(yml).asInstanceOf[YamlJavaData]
+    println(data)
+    ArchitectureBuildingBlockYamlIO.read(data)
+    println(townPlan)
+    assert(
+      townPlan.architectureBuildingBlocks.exists(abb =>
+        abb.isHazardousCriticality && abb.criticality.consequences == "Bad things happen"
+      )
+    )
   }
 }

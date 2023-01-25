@@ -5,6 +5,7 @@ import com.innovenso.innozu.io.yaml.concepts.BusinessCapabilityYamlIO.withMap
 import com.innovenso.innozu.io.yaml.concepts.EnterpriseYamlIO.YamlJavaData
 import com.innovenso.innozu.io.yaml.properties.{
   ArchitectureVerdictYamlIO,
+  CriticalityYamlIO,
   DescriptionYamlIO,
   ExternalIdYamlIO,
   LinksYamlIO,
@@ -18,6 +19,7 @@ import com.innovenso.townplanner.model.concepts.properties.{
   ArchitectureVerdict,
   CanConfigureTitle,
   HasArchitectureVerdict,
+  HasCriticality,
   HasDescription,
   HasExternalIds,
   HasLinks,
@@ -67,6 +69,11 @@ trait ModelComponentYamlIO[ModelComponentType <: ModelComponent]
     modelComponent match {
       case hasArchitectureVerdict: HasArchitectureVerdict =>
         ArchitectureVerdictYamlIO.write(hasArchitectureVerdict, map)
+      case _ =>
+    }
+    modelComponent match {
+      case hasCriticality: HasCriticality =>
+        CriticalityYamlIO.write(hasCriticality, map)
       case _ =>
     }
     modelComponent match {

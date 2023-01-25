@@ -20,8 +20,8 @@ object Dependencies {
   }
 
   object GeniusFish {
-    final val config = "fish.genius" % "config_2.13" % "1.0.6"
-    final val logging = "fish.genius" % "logging_2.13" % "1.0.3"
+    final val config = "fish.genius" %% "config" % "1.0.6"
+    final val logging = "fish.genius" %% "logging" % "1.0.3"
     final val * = Seq(config, logging)
   }
 
@@ -30,7 +30,7 @@ object Dependencies {
   }
 
   object Innozu {
-    final val model = "com.innovenso" % "innozu-model_2.13" % "1.1.3"
+    final val model = "com.innovenso" %% "innozu-model" % "1.2.1"
     final val * = Seq(model)
   }
 }
