@@ -75,6 +75,13 @@ class YamlDeserializationSpec extends AnyFlatSpec {
         |  criticality:
         |    level: hazardous
         |    consequences: Bad things happen
+        |  fatherTime:
+        |    - date: '1143-09-09'
+        |      event: In Development
+        |      description: started development
+        |    - date: '1151-12-15'
+        |      event: In Production
+        |      description: gone to production
         |""".stripMargin
 
     val data: YamlJavaData = yaml.load(yml).asInstanceOf[YamlJavaData]
@@ -83,7 +90,7 @@ class YamlDeserializationSpec extends AnyFlatSpec {
     println(townPlan)
     assert(
       townPlan.architectureBuildingBlocks.exists(abb =>
-        abb.isHazardousCriticality && abb.criticality.consequences == "Bad things happen"
+        abb.isHazardousCriticality && abb.criticality.consequences == "Bad things happen" && abb.lifeEvents.size == 2
       )
     )
   }
