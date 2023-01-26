@@ -1,15 +1,6 @@
 package com.innovenso.innozu.io.yaml.concepts
 
-import com.innovenso.innozu.io.yaml.properties.{
-  ArchitectureVerdictYamlIO,
-  CriticalityYamlIO,
-  DescriptionYamlIO,
-  ExternalIdYamlIO,
-  LinksYamlIO,
-  SWOTYamlIO,
-  TagPropertyYamlIO,
-  TitleYamlIO
-}
+import com.innovenso.innozu.io.yaml.properties.{ArchitectureVerdictYamlIO, CriticalityYamlIO, DescriptionYamlIO, ExternalIdYamlIO, FatherTimeYamlIO, LinksYamlIO, SWOTYamlIO, TagPropertyYamlIO, TitleYamlIO}
 import com.innovenso.townplanner.model.EnterpriseArchitecture
 import com.innovenso.townplanner.model.concepts.ArchitectureBuildingBlock
 import com.innovenso.townplanner.model.meta.Key
@@ -37,6 +28,7 @@ object ArchitectureBuildingBlockYamlIO
       ExternalIdYamlIO
         .readMany(data)
         .foreach(i => it isIdentifiedAs i.id on i.externalSystemName)
+      FatherTimeYamlIO.readMany(data).foreach(fatherTime => it has fatherTime)
     }
 
 }

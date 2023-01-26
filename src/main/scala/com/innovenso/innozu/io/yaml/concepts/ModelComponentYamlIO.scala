@@ -8,6 +8,7 @@ import com.innovenso.innozu.io.yaml.properties.{
   CriticalityYamlIO,
   DescriptionYamlIO,
   ExternalIdYamlIO,
+  FatherTimeYamlIO,
   LinksYamlIO,
   SWOTYamlIO,
   TagPropertyYamlIO,
@@ -22,6 +23,7 @@ import com.innovenso.townplanner.model.concepts.properties.{
   HasCriticality,
   HasDescription,
   HasExternalIds,
+  HasFatherTime,
   HasLinks,
   HasSWOT,
   HasTagProperties,
@@ -84,6 +86,11 @@ trait ModelComponentYamlIO[ModelComponentType <: ModelComponent]
     modelComponent match {
       case hasTagProperties: HasTagProperties =>
         TagPropertyYamlIO.write(hasTagProperties, map)
+      case _ =>
+    }
+    modelComponent match {
+      case hasFatherTime: HasFatherTime =>
+        FatherTimeYamlIO.write(hasFatherTime, map)
       case _ =>
     }
   }
