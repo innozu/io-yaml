@@ -6,6 +6,8 @@ import com.innovenso.innozu.io.yaml.concepts.EnterpriseYamlIO.YamlJavaData
 import com.innovenso.innozu.io.yaml.properties.{
   ArchitectureVerdictYamlIO,
   CriticalityYamlIO,
+  DataAttributeYamlIO,
+  DataClassificationYamlIO,
   DescriptionYamlIO,
   ExternalIdYamlIO,
   FatherTimeYamlIO,
@@ -21,6 +23,8 @@ import com.innovenso.townplanner.model.concepts.properties.{
   CanConfigureTitle,
   HasArchitectureVerdict,
   HasCriticality,
+  HasDataAttributes,
+  HasDataClassification,
   HasDescription,
   HasExternalIds,
   HasFatherTime,
@@ -92,6 +96,16 @@ trait ModelComponentYamlIO[ModelComponentType <: ModelComponent]
     modelComponent match {
       case hasFatherTime: HasFatherTime =>
         FatherTimeYamlIO.write(hasFatherTime, map)
+      case _ =>
+    }
+    modelComponent match {
+      case hasDataAttributes: HasDataAttributes =>
+        DataAttributeYamlIO.write(hasDataAttributes, map)
+      case _ =>
+    }
+    modelComponent match {
+      case hasDataClassification: HasDataClassification =>
+        DataClassificationYamlIO.write(hasDataClassification, map)
       case _ =>
     }
   }

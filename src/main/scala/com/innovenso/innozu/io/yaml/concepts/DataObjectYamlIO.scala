@@ -33,6 +33,10 @@ object DataObjectYamlIO extends ModelComponentYamlIO[DataObject] {
       FatherTimeYamlIO
         .readMany(data)
         .foreach(fatherTime => it has fatherTime on fatherTime.date)
+      DataAttributeYamlIO
+        .readMany(data)
+        .foreach(dataAttribute => it has dataAttribute)
+      it has DataClassificationYamlIO.read(data)
     }
 
     val sortKey: SortKey = readSortKey(data)

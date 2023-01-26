@@ -32,6 +32,17 @@ trait YamlIO extends Loggable {
         None
     }
 
+  def readBoolean(data: YamlJavaData, key: String): Option[Boolean] =
+    data.asScala match {
+      case v if v.get(key).exists(kv => kv.isInstanceOf[Boolean]) =>
+        val theBoolean = v(key).asInstanceOf[Boolean]
+        debug(s"reading boolean with key $key: $theBoolean")
+        Some(theBoolean)
+      case _ =>
+        debug(s"no entry found with key $key")
+        None
+    }
+
   def readStrings(data: YamlJavaData, key: String): List[String] =
     data.asScala match {
       case v if v.get(key).exists(kv => kv.isInstanceOf[java.util.List[_]]) =>

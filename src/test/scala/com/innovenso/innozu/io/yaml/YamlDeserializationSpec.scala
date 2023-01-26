@@ -12,6 +12,7 @@ import com.innovenso.innozu.io.yaml.concepts.{
 }
 import com.innovenso.innozu.io.yaml.properties.TitleYamlIO.YamlJavaData
 import com.innovenso.townplanner.model.concepts.Enterprise
+import com.innovenso.townplanner.model.concepts.properties.PublicData
 import com.innovenso.townplanner.model.meta.Key
 import org.scalatest.flatspec.AnyFlatSpec
 
@@ -153,6 +154,105 @@ class YamlDeserializationSpec extends AnyFlatSpec {
                 |    tibique utroque dolorem condimentum adversarium a adipisci quaestio quis suscipit
                 |    error atqui dicit adhuc corrumpit offendit urna ad persequeris dapibus lobortis
                 |    egestas elitr dictum melius dissentiunt causae mel
+                |  attributes:
+                |  - name: quaerendum
+                |    description: dolor magnis disputationi expetendis libris gravida velit dis et
+                |      eius aliquet autem sapien viris adipiscing maximus ne mediocrem ei ridiculus
+                |      facilisis porta adhuc lacinia
+                |    type: mediocritatem
+                |    required: false
+                |    multiple: true
+                |  - name: himenaeos
+                |    description: necessitatibus a ferri invenire parturient prompta deserunt gravida
+                |      fusce eu platea ridiculus errem eirmod iudicabit noluisse discere tincidunt
+                |      equidem qualisque sonet pharetra condimentum conclusionemque petentium constituto
+                |      elitr euismod dictas convenire sententiae adipisci movet sociosqu non potenti
+                |      dicant volutpat disputationi justo disputationi intellegebat dicta wisi adipiscing
+                |      a nibh erat aliquip adipiscing dissentiunt eu finibus sodales nisi sale intellegat
+                |      aliquip saepe solet natum commodo duo nisi maximus
+                |    type: ferri
+                |    required: true
+                |    multiple: false
+                |  - name: maecenas
+                |    description: netus ea nulla arcu curabitur minim condimentum dicit legimus dolores
+                |      adolescens principes doctus platonem habitant harum ultrices delicata eloquentiam
+                |      explicari meliore montes luptatum ne equidem laoreet praesent ullamcorper senectus
+                |      malesuada sem agam dicant purus harum melius libero ut
+                |    type: delectus
+                |    required: true
+                |    multiple: true
+                |  - name: maiestatis
+                |    description: verear civibus mauris suas tibique senectus ligula ornare agam mutat
+                |      utroque molestiae agam mauris electram himenaeos voluptatibus verterem veri
+                |      impetus penatibus dictas justo mentitum viderer condimentum elementum definitiones
+                |      reformidans quidam elitr verterem voluptatibus dicat nibh gubergren simul sapien
+                |      dicit tempor accumsan condimentum ad nisl molestie numquam sociis postulant
+                |      dicam adhuc ei tincidunt debet enim sollicitudin corrumpit porro rutrum meliore
+                |      porta solet diam id imperdiet reque disputationi adversarium reprehendunt definitionem
+                |    type: conclusionemque
+                |    required: true
+                |    multiple: true
+                |  - name: natoque
+                |    description: aperiri feugait pretium dissentiunt conceptam luctus curae augue
+                |      equidem tale his venenatis deserunt appetere falli id dictum maluisset cum potenti
+                |      putent persius dolorum vix animal suscipit minim lectus dictum eius postea elitr
+                |      maecenas efficiantur tincidunt persecuti doming posidonium dignissim curae eleifend
+                |      deserunt erroribus suas libero ridens saperet quot lobortis fuisset quisque
+                |      ius sociosqu natum perpetua ferri possim persius altera menandri aliquam constituam
+                |      aliquid tantas dolorem commune te efficitur ante quem mel netus melius taciti
+                |      pro penatibus porro adipisci posse causae sociosqu comprehensam ea curabitur
+                |      aliquid eripuit tractatos
+                |    type: liber
+                |    required: false
+                |    multiple: false
+                |  - name: dicat
+                |    description: harum maiestatis conclusionemque vocibus quidam odio fugit interpretaris
+                |      qui efficiantur volutpat numquam platea mnesarchum orci cu animal
+                |    type: sale
+                |    required: false
+                |    multiple: false
+                |  - name: donec
+                |    description: lacinia veniam donec solum amet oratio ignota aliquid fusce quas
+                |      neque constituto discere penatibus ignota tincidunt facilisi at theophrastus
+                |      graeci dicam mazim definitionem latine dolores cum morbi feugiat velit graeci
+                |      movet sale dicant eloquentiam accommodare dicunt convallis wisi hinc alia propriae
+                |      vocibus atomorum simul laudem cursus mucius curabitur eloquentiam adolescens
+                |      cetero quem saperet persecuti epicurei reprimique purus dolores interesset offendit
+                |      vocent aptent audire eirmod civibus iusto interdum accumsan ornare causae harum
+                |      morbi tamquam postulant bibendum dicat fabulas class conclusionemque himenaeos
+                |      primis evertitur massa purus
+                |    type: ei
+                |    required: false
+                |    multiple: true
+                |  - name: audire
+                |    description: mei tation eripuit vitae constituto imperdiet volutpat civibus posuere
+                |      ubique deterruisset nulla montes conceptam definitionem habitasse sed graece
+                |      vel vestibulum alienum iisque elitr prodesset intellegat ea aenean harum possit
+                |      elementum deserunt porro no novum mediocrem pellentesque delenit dicant utroque
+                |      mauris utamur brute volutpat platea ridens alterum accumsan constituto dicant
+                |      purus honestatis adipiscing delicata dicant mollis definitiones imperdiet fames
+                |      repudiandae perpetua interesset ridens vulputate quisque iusto senserit ubique
+                |    type: quod
+                |    required: false
+                |    multiple: true
+                |  - name: platonem
+                |    description: morbi verear maximus aliquid praesent idque alienum alterum veritus
+                |      corrumpit aliquip sanctus ius efficiantur inani habitasse placerat brute aptent
+                |      oratio veritus detraxit gravida detracto iusto rhoncus elaboraret efficiantur
+                |      perpetua sem recteque ludus dicunt fringilla usu mi habemus delicata nonumes
+                |      conubia necessitatibus nibh his dictas periculis ad dico dico elaboraret nostrum
+                |      tempus definitionem tristique principes epicurei magnis legere congue nulla
+                |      mattis fringilla postea possim pri adipisci class delectus novum cum tritani
+                |      vituperatoribus posidonium ultrices praesent ius
+                |    type: ligula
+                |    required: false
+                |    multiple: true
+                |  - name: justo
+                |    description: dictumst eam quot adipisci amet diam comprehensam aptent maiorum
+                |      maecenas interdum ancillae
+                |    type: postulant
+                |    required: true
+                |    multiple: true
                 |  links:
                 |  - type: Development URL
                 |    url: https://duckduckgo.com/?q=mazim
@@ -167,6 +267,7 @@ class YamlDeserializationSpec extends AnyFlatSpec {
                 |    id: d3cc4a63_7dbf_4eb1_9f3e_c1eea7ef1971
                 |  - system: iisque
                 |    id: 6227ea5d_5836_4ba5_ac8d_ebc94ec52b7a
+                |  public: This is public data
                 |- key: value_object_1
                 |  sortKey: '000000025'
                 |  type: value object
@@ -221,7 +322,8 @@ class YamlDeserializationSpec extends AnyFlatSpec {
       townPlan
         .dataObject(Key.fromString("entity_1"))
         .exists(d =>
-          d.dataObjectType == "entity" && d.title.value == "Delicata"
+          d.dataObjectType == "entity" && d.title.value == "Delicata" && d.dataAttributes.nonEmpty && d.dataClassification
+            .exists(c => c.level == PublicData)
         )
     )
   }
