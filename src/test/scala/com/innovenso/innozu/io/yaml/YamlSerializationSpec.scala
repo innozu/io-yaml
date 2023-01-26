@@ -6,6 +6,7 @@ import com.innovenso.innozu.io.yaml.concepts.{
   BusinessCapabilityYamlIO,
   DataObjectYamlIO,
   EnterpriseYamlIO,
+  ItPlatformYamlIO,
   OrganisationYamlIO,
   PersonYamlIO,
   TeamYamlIO
@@ -16,6 +17,7 @@ import com.innovenso.townplanner.model.concepts.{
   BusinessCapability,
   Enterprise,
   Entity,
+  ItPlatform,
   Organisation,
   Person,
   Tag,
@@ -69,5 +71,11 @@ class YamlSerializationSpec extends AnyFlatSpec {
     val valueObject = ea hasRandomDataObject ValueObject()
     val samples = List(entity, valueObject)
     println(serialize(DataObjectYamlIO.write(samples)))
+  }
+
+  it should "serialize platforms" in new EnterpriseArchitectureContext {
+    val platforms: List[ItPlatform] =
+      samples.times(10, i => ea hasRandom ItPlatform())
+    println(serialize(ItPlatformYamlIO.write(platforms)))
   }
 }

@@ -12,6 +12,7 @@ import com.innovenso.innozu.io.yaml.properties.{
   ExternalIdYamlIO,
   FatherTimeYamlIO,
   LinksYamlIO,
+  ResilienceMeasureYamlIO,
   SWOTYamlIO,
   TagPropertyYamlIO,
   TitleYamlIO
@@ -29,6 +30,7 @@ import com.innovenso.townplanner.model.concepts.properties.{
   HasExternalIds,
   HasFatherTime,
   HasLinks,
+  HasResilienceMeasures,
   HasSWOT,
   HasTagProperties,
   HasTitle
@@ -106,6 +108,11 @@ trait ModelComponentYamlIO[ModelComponentType <: ModelComponent]
     modelComponent match {
       case hasDataClassification: HasDataClassification =>
         DataClassificationYamlIO.write(hasDataClassification, map)
+      case _ =>
+    }
+    modelComponent match {
+      case hasResilienceMeasures: HasResilienceMeasures =>
+        ResilienceMeasureYamlIO.write(hasResilienceMeasures, map)
       case _ =>
     }
   }
