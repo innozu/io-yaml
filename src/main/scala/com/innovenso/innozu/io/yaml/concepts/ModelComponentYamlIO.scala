@@ -51,6 +51,7 @@ trait ModelComponentYamlIO[ModelComponentType <: ModelComponent]
   def write(modelComponent: ModelComponentType): YamlJavaData = withMap { map =>
     debug(s"writing $modelComponent")
     writeKeys(modelComponent, map)
+    writeExtraProperties(modelComponent, map)
     modelComponent match {
       case hasTitle: HasTitle => TitleYamlIO.write(hasTitle, map)
       case _                  =>
@@ -126,6 +127,11 @@ trait ModelComponentYamlIO[ModelComponentType <: ModelComponent]
     data.put("key", modelComponent.key.value)
     modelComponent.sortKey.value.foreach(sk => data.put("sortKey", sk))
   }
+
+  def writeExtraProperties(
+      modelComponent: ModelComponentType,
+      data: YamlData
+  ): Unit = {}
 
   def readKey(data: YamlJavaData): Key =
     readString(data, "key").map(Key.fromString).getOrElse(Key())
