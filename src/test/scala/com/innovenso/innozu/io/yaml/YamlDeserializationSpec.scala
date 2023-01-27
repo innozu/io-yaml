@@ -7,6 +7,8 @@ import com.innovenso.innozu.io.yaml.concepts.{
   DataObjectYamlIO,
   EnterpriseYamlIO,
   ItPlatformYamlIO,
+  ItSystemIntegrationYamlIO,
+  ItSystemYamlIO,
   OrganisationYamlIO,
   PersonYamlIO,
   TeamYamlIO
@@ -701,5 +703,27 @@ class YamlDeserializationSpec extends AnyFlatSpec {
     println(townPlan)
     assert(townPlan.platforms.nonEmpty)
     assert(townPlan.platforms.exists(p => p.resilienceMeasures.nonEmpty))
+  }
+
+  it should "read system integrations from YAML" in new EnterpriseArchitectureContext {
+    val yml =
+      """systems:
+        |- key: system_1
+        |  title: System 1
+        |- key: system_2
+        |  title: System 2
+        |integrations:
+        |- key: integration_1
+        |  sortKey: '000000037'
+        |  system1: it_system_1
+        |  system2: it_system_2
+        |  title: hello
+        |""".stripMargin
+    val data: YamlJavaData = yaml.load(yml).asInstanceOf[YamlJavaData]
+    println(data)
+    ItSystemYamlIO.read(data)
+    assert(townPlan.systems.size == 2)
+    ItSystemIntegrationYamlIO.read(data)
+    assert(townPlan.systemIntegrations.size == 1)
   }
 }

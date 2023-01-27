@@ -13,6 +13,7 @@ import com.innovenso.innozu.io.yaml.concepts.{
   PersonYamlIO,
   TeamYamlIO
 }
+import com.innovenso.townplanner.model.concepts.properties.Title
 import com.innovenso.townplanner.model.concepts.{
   Actor,
   ArchitectureBuildingBlock,
@@ -102,7 +103,10 @@ class YamlSerializationSpec extends AnyFlatSpec {
     val system2: ItSystem = ea hasRandom ItSystem()
     println(townPlan)
     val integration: ItSystemIntegration =
-      ea hasRandomItSystemIntegration (system1, system2)
-    println(serialize(ItSystemIntegrationYamlIO.write(integration)))
+      ea describes ItSystemIntegration() between system1 and system2 as { it =>
+        it has Title("hello")
+      }
+
+    println(serialize(ItSystemIntegrationYamlIO.write(List(integration))))
   }
 }
