@@ -7,6 +7,7 @@ import com.innovenso.innozu.io.yaml.concepts.{
   DataObjectYamlIO,
   EnterpriseYamlIO,
   ItPlatformYamlIO,
+  ItSystemIntegrationYamlIO,
   ItSystemYamlIO,
   OrganisationYamlIO,
   PersonYamlIO,
@@ -20,6 +21,7 @@ import com.innovenso.townplanner.model.concepts.{
   Entity,
   ItPlatform,
   ItSystem,
+  ItSystemIntegration,
   Organisation,
   Person,
   PlatformLayer,
@@ -93,5 +95,14 @@ class YamlSerializationSpec extends AnyFlatSpec {
           }
       )
     println(serialize(ItSystemYamlIO.write(systems)))
+  }
+
+  it should "serialize system integrations" in new EnterpriseArchitectureContext {
+    val system1: ItSystem = ea hasRandom ItSystem()
+    val system2: ItSystem = ea hasRandom ItSystem()
+    println(townPlan)
+    val integration: ItSystemIntegration =
+      ea hasRandomItSystemIntegration (system1, system2)
+    println(serialize(ItSystemIntegrationYamlIO.write(integration)))
   }
 }
