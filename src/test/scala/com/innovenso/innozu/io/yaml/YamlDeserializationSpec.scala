@@ -718,6 +718,9 @@ class YamlDeserializationSpec extends AnyFlatSpec {
         |  system1: it_system_1
         |  system2: it_system_2
         |  title: hello
+        |  throughput:
+        |    volume: millions of records
+        |    frequency: realtime, every second
         |""".stripMargin
     val data: YamlJavaData = yaml.load(yml).asInstanceOf[YamlJavaData]
     println(data)
