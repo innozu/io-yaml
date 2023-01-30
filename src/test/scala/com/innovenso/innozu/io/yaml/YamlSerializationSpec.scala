@@ -15,10 +15,12 @@ import com.innovenso.innozu.io.yaml.concepts.{
   TeamYamlIO
 }
 import com.innovenso.townplanner.model.concepts.properties.Title
+import com.innovenso.townplanner.model.concepts.relationships.Accessing
 import com.innovenso.townplanner.model.concepts.{
   Actor,
   ArchitectureBuildingBlock,
   BusinessCapability,
+  DataObject,
   Database,
   Enterprise,
   Entity,
@@ -119,5 +121,18 @@ class YamlSerializationSpec extends AnyFlatSpec {
     val container2: ItContainer = ea hasRandomContainer Database()
     println(townPlan)
     println(serialize(ItContainerYamlIO.write(List(container1, container2))))
+  }
+
+  it should "serialize Accessing relationships" in new EnterpriseArchitectureContext {
+    val dataObject: DataObject = ea hasRandomDataObject Entity()
+    val system1: ItSystem = ea describesRandom ItSystem() as { it =>
+      it accesses (dataObject, "accesses")
+    }
+    println(townPlan)
+    println(
+      serialize(
+        ItSystemYamlIO.write(List(system1))
+      )
+    )
   }
 }

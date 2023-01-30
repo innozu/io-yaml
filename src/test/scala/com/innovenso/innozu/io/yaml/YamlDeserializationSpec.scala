@@ -970,4 +970,560 @@ class YamlDeserializationSpec extends AnyFlatSpec {
     )
 
   }
+
+  it should "read IT Systems from YAML" in new EnterpriseArchitectureContext {
+    val yml = """data:
+                |- key: entity_1
+                |  sortKey: '000000001'
+                |  type: entity
+                |  title: Patrioque
+                |  description:
+                |  - singulis consequat unum ea posse dolores persius velit tation civibus comprehensam
+                |    labores reformidans litora epicurei rhoncus risus contentiones libris curabitur
+                |    vituperatoribus leo ei offendit augue corrumpit ligula porttitor fames hendrerit
+                |    mazim in sententiae nihil cetero aenean an duis euismod mazim legimus magna evertitur
+                |    tincidunt suscipit appetere persius facilisis delectus condimentum cursus error
+                |    venenatis dolor curabitur vel vituperatoribus signiferumque ancillae accumsan
+                |    eget atomorum appetere graeco equidem conclusionemque praesent nostrum mauris
+                |    tritani dicta aliquet maluisset movet consectetuer animal voluptatum mi ridens
+                |    omnesque percipit consul legere fastidii autem ornare quod repudiare melius mel
+                |    invenire litora
+                |  - fugit nonumes interdum scripta vero tortor mel sit tractatos in nonumes dui quis
+                |    iusto tation scripta nostra hac qualisque dissentiunt prodesset ridiculus platonem
+                |    commune vidisse proin utinam constituam tantas habeo assueverit minim no hendrerit
+                |    etiam menandri inceptos sollicitudin ligula numquam elementum graecis adolescens
+                |    molestie causae comprehensam iriure melius noluisse quidam in taciti conceptam
+                |    causae suavitate dictum finibus deseruisse ferri iudicabit sodales ipsum montes
+                |    quod libero equidem fames hendrerit fames augue delenit mazim putent dignissim
+                |    ornare voluptaria expetendis felis decore pro
+                |  links:
+                |  - type: Functional Documentation
+                |    url: https://search.yahoo.com/search?p=eruditi
+                |    title: Mnesarchum Cetero
+                |  - type: Website
+                |    url: https://search.yahoo.com/search?p=ac
+                |    title: Invenire
+                |  - type: Pre-Production URL
+                |    url: https://duckduckgo.com/?q=doctus
+                |    title: Iisque Offendit
+                |  externalIds:
+                |  - system: 'no'
+                |    id: 5d6d1a5c_16b9_4e11_8ea6_ffadffe8f2dc
+                |  fatherTime:
+                |  - date: '1085-10-22'
+                |    event: Life Event
+                |    description: qualisque perpetua pretium liber ullamcorper ridens cum elementum
+                |      pulvinar senserit tritani labores solum nec inceptos eleifend nisl option vel
+                |      pulvinar indoctum enim cu conceptam constituam ut arcu eruditi omnesque cubilia
+                |      definiebas massa discere fugit proin ullamcorper fames fabellas voluptaria perpetua
+                |      ridens dico malesuada parturient pulvinar leo referrentur per vestibulum reformidans
+                |      cursus qualisque te mauris tortor fabellas porttitor debet eripuit animal scripserit
+                |      potenti simul dolores repudiare neglegentur himenaeos quot ubique mattis epicuri
+                |      molestie definiebas imperdiet eu suas ponderum scelerisque legere fames persecuti
+                |      populo augue sollicitudin convenire velit quis eloquentiam veri explicari graecis
+                |  - date: '1120-06-05'
+                |    event: Done
+                |    description: egestas offendit no morbi quaestio quot eleifend falli populo non
+                |      primis reformidans scripserit doctus dignissim erroribus atqui commune posse
+                |      vitae persequeris quaestio percipit luptatum possim postea ante adolescens inciderint
+                |      ignota primis ne efficitur primis his impetus fabulas quaestio verear theophrastus
+                |      liber epicuri definitionem esse delectus suscipiantur cursus conclusionemque
+                |      omittam ei luptatum vix aliquet scripserit reprimique patrioque inceptos quem
+                |      ultricies iisque explicari cum recteque similique dissentiunt nullam alienum
+                |      feugait mea vocibus ridens noluisse accusata falli aliquid antiopam menandri
+                |      sapientem brute fabulas amet augue graeci class tale impetus audire
+                |  - date: '1259-02-03'
+                |    event: Due
+                |    description: scripserit fringilla dolor augue maecenas doctus cursus dicta his
+                |      qui similique lacus vituperatoribus integer audire graecis verear his luptatum
+                |      ligula impetus alia putent accusata
+                |  - date: '1951-01-28'
+                |    event: In Development
+                |    description: inciderint porta eget iisque tota dolorem molestie
+                |  - date: '2459-08-21'
+                |    event: Conceived
+                |    description: prompta sagittis molestiae penatibus molestie animal volumus sed
+                |      ex maluisset vel praesent wisi no vix regione fugit equidem natoque suspendisse
+                |      auctor brute solum aeque recteque quod consul recteque vis quam option vel referrentur
+                |      adversarium sociis indoctum aliquip hac dictas appareat sollicitudin duo amet
+                |      aptent mazim fabellas tincidunt tale dignissim curabitur persecuti tritani tristique
+                |      efficitur pellentesque conceptam ipsum
+                |  - date: '2654-07-06'
+                |    event: Decommissioned
+                |    description: non odio ornatus feugiat commune rutrum tellus justo referrentur
+                |      wisi accommodare auctor at mauris similique aliquip sapien eum gravida persequeris
+                |      verear docendi consul dolorum erat convenire varius scelerisque in vero verterem
+                |      dico instructior mollis nullam latine quo mediocrem labores theophrastus civibus
+                |  - date: '2698-05-02'
+                |    event: Active
+                |    description: latine delenit iisque ante interdum duo sapien pericula
+                |  - date: '2875-10-20'
+                |    event: In Production
+                |    description: noluisse ultricies reformidans adipiscing conceptam eius brute varius
+                |      volumus necessitatibus porttitor invenire fabulas sapien ut sociis oporteat
+                |      fabulas turpis aliquet pertinax deterruisset imperdiet elaboraret at fabellas
+                |      elitr neglegentur dolorum eam intellegat doctus sonet odio sem sonet et velit
+                |      odio iisque gloriatur contentiones lectus ligula persequeris suspendisse ad
+                |      efficiantur
+                |  - date: '0576-02-22'
+                |    event: Retired
+                |    description: volutpat ullamcorper harum class offendit delenit id nominavi dictas
+                |      sententiae constituto fames definiebas proin dicta mauris orci duo tota audire
+                |      detraxit reprehendunt elaboraret consectetur molestie pretium facilisi vidisse
+                |      etiam imperdiet dolore nostrum persecuti rhoncus vim aliquip euripidis gravida
+                |      eruditi vituperatoribus mucius decore nascetur iaculis aliquip vivendo suscipiantur
+                |      vocibus aliquam persius facilisi menandri tibique semper sadipscing graece eam
+                |      ornare pertinax persecuti dapibus numquam pertinacia duo sollicitudin doctus
+                |  - date: '0064-12-04'
+                |    event: In Preproduction
+                |    description: vitae lacinia sed delectus maximus aliquip per petentium inani quaerendum
+                |      interpretaris an in explicari pertinax ac neque ex veri definiebas solum tamquam
+                |      inciderint verterem cetero nobis suscipiantur laoreet sed eros etiam instructior
+                |      quidam disputationi delectus cursus litora vehicula moderatius autem netus convenire
+                |      dui magnis eam vituperata errem suspendisse honestatis singulis
+                |  - date: '0764-07-24'
+                |    event: Started
+                |    description: antiopam noluisse mazim consetetur auctor tamquam dicta erroribus
+                |      vituperatoribus dis adipiscing aliquam fames nonumy graeci cu periculis cubilia
+                |      oratio molestiae libero iudicabit vituperata tota amet deterruisset ponderum
+                |      sonet populo aeque referrentur nisl dicta ad ignota tritani reque quod simul
+                |      unum vero has hinc dico inceptos menandri
+                |  attributes:
+                |  - name: quo
+                |    description: class causae definitionem scripserit utroque consequat
+                |    type: feugiat
+                |    required: false
+                |    multiple: false
+                |  - name: dolorum
+                |    description: ancillae petentium sit nihil finibus volutpat ius menandri vivamus
+                |      pertinax nonumes has massa simul reprimique mel simul voluptaria pharetra viderer
+                |      nonumes sumo debet pro deterruisset semper vix delectus proin singulis efficiantur
+                |    type: vero
+                |    required: true
+                |    multiple: false
+                |  - name: oratio
+                |    description: neque et solum suspendisse mediocritatem sanctus conclusionemque
+                |      delenit vulputate dolor risus id veri impetus signiferumque
+                |    type: definitionem
+                |    required: true
+                |    multiple: true
+                |  - name: putent
+                |    description: facilisi vitae nostrum platonem animal homero nominavi gravida alienum
+                |      vituperata enim dicat invenire laoreet expetendis adolescens justo platea atqui
+                |      decore quo conceptam facilisi dapibus placerat fabellas porttitor felis necessitatibus
+                |      platonem venenatis tamquam noster ferri epicuri aliquet no salutatus voluptaria
+                |      ferri elementum fastidii luptatum constituam consul voluptaria viderer te nominavi
+                |      saepe consul interdum saperet ea vocibus agam
+                |    type: dicta
+                |    required: false
+                |    multiple: false
+                |  - name: vocibus
+                |    description: maecenas idque cu contentiones iaculis ornatus amet sententiae petentium
+                |      oporteat laoreet doctus quem convallis lorem nisl brute inani consetetur sumo
+                |      scelerisque ligula
+                |    type: dicant
+                |    required: true
+                |    multiple: true
+                |  - name: doming
+                |    description: veniam nostra conclusionemque error pri tortor dictas evertitur mus
+                |      mucius dicunt electram delenit sententiae decore possim vulputate eleifend vitae
+                |      graece invidunt mnesarchum quaeque ponderum dicant tractatos accommodare comprehensam
+                |      sapientem at mediocrem graece mea mattis appareat egestas sit dicit maiestatis
+                |      oporteat conclusionemque pertinacia rhoncus quot dicunt
+                |    type: taciti
+                |    required: false
+                |    multiple: true
+                |  - name: qui
+                |    description: verear electram etiam ei reformidans porttitor nunc quot ponderum
+                |      graecis mazim expetenda semper suscipiantur dissentiunt solet dolores erat qualisque
+                |      consectetuer fastidii omittantur varius finibus fugit discere ut
+                |    type: error
+                |    required: false
+                |    multiple: true
+                |  - name: deserunt
+                |    description: accommodare metus quaestio quod sententiae graeco atomorum posse
+                |      facilisis phasellus pharetra melius vituperata prodesset esse
+                |    type: adversarium
+                |    required: true
+                |    multiple: true
+                |  sensitive: antiopam laudem gloriatur dicit ferri ponderum habemus dapibus nunc senectus
+                |    saepe possim mandamus semper delectus alia intellegebat aliquet movet possim mi
+                |    homero mei saperet rutrum pro verear litora simul quisque maiorum ridens nostra
+                |    fusce repudiare eu interdum tamquam eruditi maiorum proin felis accumsan brute
+                |    alterum purus noluisse corrumpit definiebas nonumy molestiae eum nunc indoctum
+                |    autem lacus est putent feugiat vitae iisque vel etiam turpis vituperata movet
+                |    cursus reformidans quaerendum mollis error eos hinc harum movet petentium mei
+                |    accusata inciderint litora amet salutatus vim decore nominavi ceteros ridiculus
+                |    cursus harum tibique ludus vix sapien
+                |- key: value_object_1
+                |  sortKey: '000000019'
+                |  type: value object
+                |  title: Magnis Utinam
+                |  description:
+                |  - velit malorum intellegebat docendi et sententiae phasellus posuere dolores fusce
+                |    omittantur instructior repudiandae nascetur mediocrem sociosqu tota similique
+                |    dignissim honestatis volumus convallis imperdiet vocent epicurei adolescens ad
+                |    scripserit dignissim definitionem necessitatibus idque senserit semper vituperatoribus
+                |    commodo graecis ultricies repudiandae viderer mel sumo quaeque mediocrem commodo
+                |    ponderum iusto conubia commune vocibus eum falli utamur principes consetetur leo
+                |    causae veniam iudicabit purus harum causae pretium partiendo quisque laudem labores
+                |    postea vivendo natum epicuri vituperata contentiones reprehendunt numquam semper
+                |    tritani nominavi singulis tritani fabulas solum ridens natum
+                |  - laudem commodo habemus nominavi velit ius numquam dicant moderatius unum vitae
+                |    ac aliquam habeo solet disputationi vidisse facilis legere vivamus maiorum expetenda
+                |    fastidii nibh invidunt primis meliore sale mei
+                |  - honestatis cum iuvaret platonem commodo aliquip melius laoreet utamur sociis vocibus
+                |    mea purus eos voluptatibus bibendum erroribus persequeris malorum tation alterum
+                |    mi mus scripserit luctus saepe vivamus lacinia detracto tale libero eius homero
+                |    class posse mauris definiebas mattis dicunt unum elit epicurei sapien blandit
+                |    ligula dico partiendo viris faucibus solet repudiandae suas theophrastus platea
+                |    mei habitant vocent
+                |  links:
+                |  - type: Technical Documentation
+                |    url: https://search.yahoo.com/search?p=instructior
+                |    title: Doming Noster
+                |  - type: API Documentation
+                |    url: http://www.bing.com/search?q=assueverit
+                |    title: Luctus Mediocritatem
+                |  - type: Website
+                |    url: https://www.google.com/#q=ludus
+                |    title: Class Melius
+                |  - type: Website
+                |    url: https://search.yahoo.com/search?p=turpis
+                |    title: Menandri
+                |  externalIds:
+                |  - system: eirmod
+                |    id: 796fb4ff_b2c5_4f10_ac15_dd39e81032cf
+                |  - system: mea
+                |    id: c862f3d4_d3b1_4801_9a63_d925d73b158b
+                |  fatherTime:
+                |  - date: '1124-08-10'
+                |    event: Started
+                |    description: sociis accumsan vivamus cursus quo causae condimentum iisque sagittis
+                |      ubique maximus dolores ei tincidunt adipiscing alterum tota volumus maiorum
+                |      inani veniam rutrum reprehendunt mediocritatem natoque auctor sapientem instructior
+                |      quidam fames populo offendit vituperata decore ridens quidam vero repudiare
+                |      sumo tincidunt novum fermentum tacimates tation habitasse sed neque mei dicit
+                |      dissentiunt duo graeci evertitur semper mi gravida civibus ceteros tantas ocurreret
+                |      his saepe ei repudiare theophrastus definitiones quo antiopam volutpat euripidis
+                |      no sanctus corrumpit docendi mentitum noluisse quisque intellegat quaeque melius
+                |      cras cu sollicitudin discere placerat tation interdum egestas harum theophrastus
+                |      fusce comprehensam tempus vivendo neque mea tale wisi
+                |  - date: '2068-02-12'
+                |    event: Decommissioned
+                |    description: dolorum equidem sociosqu urna falli delicata
+                |  - date: '2083-07-20'
+                |    event: Due
+                |    description: periculis duis tacimates melius habitant simul commodo nonumes tacimates
+                |      quas minim dictas ex facilisis deseruisse debet has mei sapientem alienum nascetur
+                |      risus definitiones habemus tantas consectetur alterum fuisset putent efficitur
+                |      eos vel constituto maiorum ridiculus facilisi ultricies vel eleifend
+                |  - date: '0219-06-25'
+                |    event: In Development
+                |    description: solet oratio fames venenatis instructior eripuit pro ubique lorem
+                |      detraxit eloquentiam simul ius salutatus quisque aperiri proin mel malesuada
+                |      dico noluisse fusce populo contentiones cubilia intellegebat iusto nec consequat
+                |      quem efficiantur elaboraret animal efficiantur disputationi parturient eruditi
+                |      curabitur velit periculis disputationi curae ipsum regione facilisi platea persecuti
+                |      atqui necessitatibus pertinax in lacus explicari taciti utroque eros netus reprimique
+                |      utroque adipisci
+                |  - date: '2294-07-01'
+                |    event: In Preproduction
+                |    description: fastidii vero oporteat iudicabit pellentesque singulis ornatus indoctum
+                |      duo nec honestatis noster dico blandit percipit quis himenaeos volumus fames
+                |      dolor viderer
+                |  - date: '2601-01-24'
+                |    event: Done
+                |    description: propriae appetere omittantur neglegentur dicta finibus viverra animal
+                |      condimentum dicant turpis scelerisque aeque appareat tale interpretaris adhuc
+                |      maiorum idque explicari molestie integer nisi qualisque errem ultrices elit
+                |      at habeo ne an legere commune cetero imperdiet graece no nisl molestie quod
+                |      mattis viris sed tacimates voluptaria audire autem dolorum mazim mattis sollicitudin
+                |      curae per civibus mnesarchum pretium signiferumque volutpat pertinacia felis
+                |      in sociosqu deterruisset dico parturient
+                |  - date: '2751-05-13'
+                |    event: Retired
+                |    description: consequat splendide netus adipiscing homero voluptaria fermentum
+                |      nobis vis dicant putent vituperata magnis elaboraret aliquip reformidans iusto
+                |      facilis iusto qualisque ullamcorper ignota idque alienum vehicula facilis vero
+                |      ac evertitur odio efficitur class agam sed aenean viderer in gravida ultricies
+                |      disputationi quidam viverra luctus parturient a molestiae sociosqu erat scripserit
+                |      a aeque fabulas civibus mazim appetere
+                |  - date: '2872-03-05'
+                |    event: Active
+                |    description: an vix porttitor consetetur vidisse adversarium quaerendum imperdiet
+                |      dicta definitionem convallis fames quas vim pericula tellus nisi maluisset accommodare
+                |      euripidis maximus sententiae
+                |  - date: '2875-10-09'
+                |    event: In Production
+                |    description: vim explicari ea posidonium offendit sadipscing ubique has homero
+                |      instructior deseruisse nominavi enim euripidis assueverit postea quisque altera
+                |      convallis habitant volutpat convenire nulla rhoncus maiorum gravida homero posidonium
+                |      novum suspendisse persius omittam euismod erat iusto reprimique atomorum hinc
+                |      labores sagittis mei mediocritatem aliquet prodesset omittam cetero invidunt
+                |      varius maiestatis homero sadipscing ferri arcu ius scelerisque lorem primis
+                |      id idque taciti mollis pro sociis nibh eos viverra adhuc sodales adhuc electram
+                |      aliquam nisi nominavi ignota vis graecis ius ultricies inciderint molestiae
+                |      mediocrem ocurreret
+                |  - date: '0334-09-12'
+                |    event: Life Event
+                |    description: hendrerit praesent viverra vestibulum rutrum detraxit eruditi natoque
+                |      assueverit elit tation hendrerit graeci cursus natum conceptam alterum debet
+                |      reque mazim fermentum mutat posidonium eros possit eos epicuri singulis vitae
+                |      autem fringilla facilisis inimicus dicat dicam aliquam persecuti consetetur
+                |      option eum faucibus porro mei laoreet sociosqu erroribus bibendum ubique ut
+                |      idque vocent animal natoque facilis moderatius iudicabit possim commune accusata
+                |      felis corrumpit dicat
+                |  - date: '0847-03-03'
+                |    event: Conceived
+                |    description: litora decore mel urbanitas class utamur magna massa causae duo velit
+                |      integer perpetua invenire suavitate curae suas electram verterem senserit fringilla
+                |      interdum ultricies indoctum conubia harum vituperatoribus phasellus appetere
+                |      assueverit idque tibique finibus ponderum duo persius scripta nam lacus senserit
+                |      option cubilia netus justo velit curabitur gloriatur posse commune primis facilisis
+                |      legere gloriatur partiendo ne fugit viverra iriure
+                |  attributes:
+                |  - name: donec
+                |    description: saperet scripserit facilisis similique id docendi periculis nisl
+                |      quem option repudiandae errem
+                |    type: scripserit
+                |    required: true
+                |    multiple: true
+                |  - name: feugiat
+                |    description: eros natoque vulputate efficitur electram omnesque non feugiat quem
+                |      sanctus graecis tibique oporteat
+                |    type: idque
+                |    required: false
+                |    multiple: false
+                |  - name: penatibus
+                |    description: doctus te sociis pharetra suscipiantur eget tantas tempus ultricies
+                |      curabitur agam a delectus mediocritatem convallis suas efficitur turpis taciti
+                |      habeo putent dolorem ut ullamcorper equidem deterruisset nisi diam habitant
+                |      mediocritatem interpretaris eam class mucius efficiantur aliquid graecis fusce
+                |      delenit sociis aperiri quidam platonem utinam vocent ius mel doctus congue eos
+                |      proin prompta tractatos augue meliore quisque ea atomorum splendide porta constituto
+                |      reformidans tation bibendum neque semper luctus vis eu lobortis atomorum mentitum
+                |      elit litora docendi id parturient suas blandit ludus quaerendum torquent quem
+                |      ius felis alterum equidem ocurreret
+                |    type: iuvaret
+                |    required: true
+                |    multiple: false
+                |  - name: repudiandae
+                |    description: ad ea tortor mutat tellus facilisi morbi maiestatis curabitur assueverit
+                |      mandamus vestibulum maluisset sociis mea intellegat ipsum vidisse numquam propriae
+                |      consul repudiare utroque contentiones ultricies salutatus rhoncus maiorum repudiandae
+                |      sententiae viverra curabitur nihil explicari cras litora vim eos consectetur
+                |      senectus deserunt veritus vix vulputate neque torquent cetero curabitur duis
+                |      eleifend auctor vestibulum moderatius cras dicat non dapibus fastidii deseruisse
+                |      ridiculus
+                |    type: reque
+                |    required: false
+                |    multiple: false
+                |  public: qualisque voluptatibus option nostrum voluptaria dolor convallis fabellas
+                |    sodales ea vitae offendit ligula an diam posse aptent habitasse te mauris postulant
+                |    assueverit mea arcu definiebas definitionem nostra per adipiscing natoque eos
+                |    tibique fugit vulputate mus dolor convenire dictumst facilisi ipsum tortor vituperata
+                |    tellus taciti fusce quas cu adipisci turpis explicari veritus senectus quaeque
+                |    eripuit lectus evertitur ut neque gloriatur fabellas sagittis mandamus ius ac
+                |    alia efficitur eleifend persius luctus voluptaria convallis placerat similique
+                |    mazim ac aliquid intellegebat inimicus accusata aptent pulvinar nominavi velit
+                |    proin aenean possim dicant harum constituam fastidii augue iisque esse impetus
+                |    dictum dicunt
+                |systems:
+                |- key: it_system_1
+                |  sortKey: '000000025'
+                |  title: Adipisci Cras
+                |  description:
+                |  - urna debet docendi postea adipisci urbanitas sententiae gravida patrioque moderatius
+                |    mandamus dignissim dolore civibus tortor nascetur scelerisque
+                |  - ne agam perpetua bibendum wisi moderatius contentiones erroribus regione signiferumque
+                |    numquam lobortis sea fabellas vocent alia fuisset intellegebat dolores eruditi
+                |    aliquip magna varius omittam class iusto intellegat patrioque eget harum conceptam
+                |    vocibus esse ridens
+                |  - facilisis ipsum nostrum ocurreret constituam risus latine cras dicit recteque
+                |    condimentum detraxit mediocrem pellentesque sollicitudin legimus an falli adversarium
+                |    tristique doctus vituperatoribus molestie ac recteque discere ipsum assueverit
+                |    legimus error fames et vituperata usu consequat conceptam diam dolorem fringilla
+                |    fermentum quisque sea dictumst malorum pertinacia adipisci urbanitas salutatus
+                |    risus vivendo regione mucius mucius delenit vocent contentiones vidisse tritani
+                |    quaestio sapien veritus postea efficitur elaboraret quod eum interesset tation
+                |    sollicitudin quo nam pellentesque malesuada velit magna sapien ullamcorper ac
+                |    comprehensam legimus vero augue vidisse verear fugit expetendis aptent noluisse
+                |    natoque dicit expetendis novum percipit tantas
+                |  - adipiscing mel laudem ancillae mattis accumsan tale iaculis meliore dicta risus
+                |    torquent iaculis laoreet adolescens affert risus quem honestatis vulputate assueverit
+                |    brute malesuada malorum patrioque altera viverra eros porro te adolescens consul
+                |    has rutrum quas maecenas ac eripuit no qui dui tritani iudicabit tamquam euripidis
+                |    mei amet ac sit deserunt posse ridiculus eu constituto tempor electram docendi
+                |    iaculis pretium propriae quidam a intellegebat himenaeos mediocritatem
+                |  - ipsum urbanitas corrumpit pericula dictumst impetus malesuada ut inimicus mattis
+                |    senectus malorum veritus constituto luptatum dolorum viris imperdiet mediocritatem
+                |    liber feugait feugait definitiones ut legimus hendrerit mollis mus veri graece
+                |    quas sententiae dico option aliquip id fabulas placerat accommodare facilis tota
+                |    oporteat proin taciti lobortis te vitae elitr id quas aptent potenti alterum regione
+                |    decore suspendisse inimicus delenit pretium viris oratio interesset atqui massa
+                |    eos causae eu molestie sodales convenire aliquam
+                |  links:
+                |  - type: Production URL
+                |    url: http://www.bing.com/search?q=utroque
+                |    title: Pulvinar Decore
+                |  - type: Development URL
+                |    url: https://www.google.com/#q=hac
+                |    title: Oporteat Consetetur
+                |  - type: Architecture Documentation
+                |    url: https://www.google.com/#q=propriae
+                |    title: Dicat
+                |  - type: Website
+                |    url: https://duckduckgo.com/?q=sociis
+                |    title: Fabulas Magnis
+                |  - type: Functional Documentation
+                |    url: https://search.yahoo.com/search?p=inimicus
+                |    title: Graeci Iaculis
+                |  - type: Functional Documentation
+                |    url: http://www.bing.com/search?q=quaestio
+                |    title: Salutatus has
+                |  - type: Website
+                |    url: https://duckduckgo.com/?q=imperdiet
+                |    title: Viris
+                |  - type: Development URL
+                |    url: http://www.bing.com/search?q=efficitur
+                |    title: Pertinax Veri
+                |  - type: Functional Documentation
+                |    url: https://search.yahoo.com/search?p=reprimique
+                |    title: Debet
+                |  swot:
+                |    opportunities:
+                |    - eius repudiare vocent augue errem cu aenean persius tincidunt eius splendide
+                |      vestibulum dolorum ridens qui luptatum mauris maluisset nam
+                |    - iriure veritus principes nisl platea iusto elitr non ridens novum pertinacia
+                |      atqui ornare gubergren definitionem offendit molestie vivendo platea suavitate
+                |      affert veniam theophrastus eam dolores nec quis eum imperdiet detracto expetenda
+                |      equidem interpretaris definitiones dis consul iriure voluptaria fringilla persequeris
+                |      nam penatibus porta iusto legere no urbanitas at habitant maiestatis option
+                |      eripuit
+                |    threats:
+                |    - assueverit alterum propriae consectetuer idque aenean eos aliquam fastidii nominavi
+                |      potenti persequeris quis himenaeos luctus
+                |  invest: graeci repudiandae tibique viderer persius amet sumo vocibus movet senserit
+                |    dictumst fabulas vero eirmod appetere harum sapientem massa constituto repudiandae
+                |    mauris antiopam quis cum nullam facilisis suas inimicus prompta iriure cu mnesarchum
+                |    a dictas libero ludus euripidis dolore ea dolores contentiones quam quaestio prodesset
+                |    sem cu omittam voluptatum reformidans nec
+                |  criticality:
+                |    level: Major
+                |    consequences: meliore consequat malorum nulla posse persequeris constituam arcu
+                |      ubique legimus porro his honestatis posidonium cras fringilla suscipiantur id
+                |      duo purus dolore ante hac omittantur salutatus atomorum harum conubia tractatos
+                |      gloriatur penatibus quaestio facilisis his scripta adhuc patrioque animal nulla
+                |      instructior putent usu debet equidem honestatis morbi litora sanctus postulant
+                |      persecuti antiopam ludus civibus voluptaria perpetua periculis disputationi
+                |      dolor reformidans epicuri laudem delenit tritani torquent magna congue conceptam
+                |      iuvaret verterem tantas alterum mutat idque unum atomorum scripta assueverit
+                |      consequat dicam impetus tota dolorem omnesque eirmod luctus comprehensam aliquet
+                |      ea
+                |  externalIds:
+                |  - system: ut
+                |    id: b7fc53a3_5eea_4336_aefe_285f3fcfe3a5
+                |  - system: voluptatum
+                |    id: 56fca8b1_7900_4567_a8d2_7a8bc8aa6d97
+                |  fatherTime:
+                |  - date: '1555-10-23'
+                |    event: Decommissioned
+                |    description: fames curae eius fugit pericula interpretaris habitasse eleifend
+                |      elaboraret pretium magnis doming voluptatibus qualisque varius alia vel viderer
+                |      massa maiorum option efficiantur alterum option platea eius ferri quod mi cursus
+                |      iusto eloquentiam proin ornatus condimentum mauris harum nam lectus necessitatibus
+                |      gubergren mi commune litora senserit sadipscing quaeque ac mediocritatem noluisse
+                |      saperet tempus viderer adipisci morbi cubilia ornatus sagittis nulla litora
+                |      atomorum quam quaestio voluptatum ea equidem voluptatum habeo platea voluptatibus
+                |      malesuada sed prodesset aenean dapibus sagittis decore tempor
+                |  - date: '1638-10-08'
+                |    event: In Production
+                |    description: suscipit faucibus quisque torquent alienum dicat quis ea mea latine
+                |      latine atomorum eam elaboraret constituto taciti autem epicurei cubilia alterum
+                |      dictum animal vivendo elementum populo oporteat referrentur liber senserit pellentesque
+                |      adipisci vehicula viderer graece porro class odio offendit putent quas comprehensam
+                |      pertinax dolores malorum felis consequat orci imperdiet persequeris laudem definitiones
+                |      elaboraret novum ad augue cursus eu lorem latine iuvaret veritus eripuit nominavi
+                |      sodales homero mei reformidans lacinia necessitatibus nominavi mea possim intellegat
+                |      fames etiam hac honestatis erat postea pertinax antiopam persecuti habeo decore
+                |      malorum explicari aliquet invenire nostrum per
+                |  - date: '1653-08-27'
+                |    event: Done
+                |    description: habemus duis quisque antiopam dolorem tortor utroque persius fermentum
+                |      est oratio utamur aptent discere ac conubia an adipisci malorum sonet aliquip
+                |      pharetra viris platea pharetra mazim arcu nascetur maximus cursus natoque mel
+                |      eripuit nascetur ut invidunt cu homero reprimique commodo montes inimicus hinc
+                |      falli
+                |  - date: '1806-02-15'
+                |    event: Active
+                |    description: primis an nisl facilisis mutat elaboraret sem tacimates netus vulputate
+                |      utamur vestibulum definitionem mazim et suas tempor nullam bibendum sanctus
+                |      atomorum suas suas turpis urbanitas finibus ferri definitiones porro atqui decore
+                |  - date: '1948-01-01'
+                |    event: Started
+                |    description: montes persequeris adolescens congue velit fringilla elaboraret disputationi
+                |      magna accommodare posidonium habitant rhoncus fabellas sollicitudin id nunc
+                |      elementum partiendo liber tation iisque tibique pulvinar brute natoque consectetur
+                |      interdum amet veri mollis posidonium tempus dignissim mus mauris malesuada quaeque
+                |      adipisci duo taciti tractatos quis vehicula dicat urbanitas cetero tibique posidonium
+                |      quidam nonumes vivamus reprehendunt litora option pretium disputationi appetere
+                |      sententiae duo aliquet torquent sit partiendo eleifend ludus voluptatibus
+                |  - date: '2145-11-14'
+                |    event: Retired
+                |    description: sale aliquip dicat litora vehicula viderer te commodo accusata mus
+                |      posuere orci ludus egestas venenatis pro sapien voluptatibus duo graeci putent
+                |      viderer melius oporteat mentitum consectetuer et ignota eos vitae sapien fastidii
+                |      erroribus feugait aliquet senectus reformidans arcu graecis iriure singulis
+                |      montes nisi an commodo moderatius fusce phasellus sapien neque porttitor salutatus
+                |      morbi cursus inceptos varius qui suspendisse nullam iusto lectus alienum mentitum
+                |      elementum
+                |  - date: '2362-11-06'
+                |    event: In Development
+                |    description: sale periculis scelerisque scelerisque delicata tacimates consequat
+                |      senectus salutatus liber iaculis inimicus delectus tortor iisque tamquam aliquip
+                |      ultricies maiorum ea possim veritus altera a amet ex vix netus ante disputationi
+                |      morbi mucius eius dictas commodo consul labores iudicabit hinc idque graece
+                |      animal maluisset an hac finibus ne cubilia justo urbanitas eius persequeris
+                |      dico dictumst adipisci iudicabit integer eruditi ridiculus ei appareat nonumes
+                |      deserunt expetenda potenti
+                |  - date: '0245-02-26'
+                |    event: Due
+                |    description: conceptam augue decore indoctum noluisse corrumpit delenit vidisse
+                |      postulant maecenas duis massa porttitor possit vituperatoribus causae noster
+                |      tractatos porttitor suspendisse pri sale egestas fabulas no mi affert ius mus
+                |      fermentum quem sit debet constituto
+                |  - date: '0068-03-22'
+                |    event: Life Event
+                |    description: iudicabit definiebas doctus vel platea facilisis delectus numquam
+                |      his gloriatur sententiae antiopam augue mucius persecuti bibendum regione possit
+                |      primis persequeris nisl necessitatibus vocent dicunt parturient dicam percipit
+                |      sea lectus dolore tellus hinc nam
+                |  - date: '0814-01-16'
+                |    event: Conceived
+                |    description: convenire magnis appareat legimus qui sapien blandit eu eius ullamcorper
+                |      per aenean consul dissentiunt commodo reque a fugit maximus epicuri
+                |  - date: '0985-05-22'
+                |    event: In Preproduction
+                |    description: consectetur duo luctus cubilia molestie scripta vero mediocrem persequeris
+                |      mucius iusto deseruisse elementum euripidis definitionem convallis taciti movet
+                |      suscipit suavitate metus tellus commodo cetero adhuc corrumpit civibus eam mattis
+                |      adhuc constituam est audire
+                |  resilience:
+                |  - habeo voluptatibus saperet vituperata velit inciderint neglegentur turpis doctus
+                |    sententiae sem menandri mazim ludus reprimique lacus altera quam tota facilisis
+                |    sem periculis egestas diam vis dicat elit adolescens porttitor verterem dignissim
+                |    dis etiam pericula ullamcorper volutpat ullamcorper fringilla constituam noster
+                |    sale sea disputationi sociosqu liber in populo nisl duo dolorum quisque ius mutat
+                |    praesent sale condimentum
+                |  accessing:
+                |  - key: accessing_1
+                |    target: entity_1
+                |    title: accesses""".stripMargin
+    val data: YamlJavaData = yaml.load(yml).asInstanceOf[YamlJavaData]
+    println(data)
+    DataObjectYamlIO.read(data)
+    ItSystemYamlIO.read(data)
+    println(townPlan.relationships)
+  }
 }

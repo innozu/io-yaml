@@ -19,6 +19,7 @@ import com.innovenso.innozu.io.yaml.properties.{
   TagPropertyYamlIO,
   TitleYamlIO
 }
+import com.innovenso.innozu.io.yaml.relationships.AccessingYamlIO
 import com.innovenso.townplanner.model.EnterpriseArchitecture
 import com.innovenso.townplanner.model.concepts.Enterprise
 import com.innovenso.townplanner.model.concepts.properties.{
@@ -39,6 +40,7 @@ import com.innovenso.townplanner.model.concepts.properties.{
   HasTagProperties,
   HasTitle
 }
+import com.innovenso.townplanner.model.concepts.relationships.CanAccess
 import com.innovenso.townplanner.model.language.ModelComponent
 import com.innovenso.townplanner.model.meta.{Key, SortKey}
 
@@ -53,12 +55,16 @@ trait ModelComponentYamlIO[ModelComponentType <: ModelComponent]
 
   def KEY: String
 
-  def write(modelComponents: List[ModelComponentType]): YamlJavaData =
+  def write(modelComponents: List[ModelComponentType])(implicit
+      ea: EnterpriseArchitecture
+  ): YamlJavaData =
     withMap { map =>
       debug(s"writing $modelComponents")
       map.put(KEY, modelComponents.map(write).asJava)
     }
-  def write(modelComponent: ModelComponentType): YamlJavaData = withMap { map =>
+  def write(modelComponent: ModelComponentType)(implicit
+      ea: EnterpriseArchitecture
+  ): YamlJavaData = withMap { map =>
     debug(s"writing $modelComponent")
     writeKeys(modelComponent, map)
     writeExtraProperties(modelComponent, map)
@@ -127,6 +133,10 @@ trait ModelComponentYamlIO[ModelComponentType <: ModelComponent]
     modelComponent match {
       case hasAPI: HasAPI => APIYamlIO.write(hasAPI, map)
       case _              =>
+    }
+    modelComponent match {
+      case canAccess: CanAccess => AccessingYamlIO.write(canAccess, map)
+      case _                    =>
     }
   }
 
