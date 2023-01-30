@@ -6,6 +6,7 @@ import com.innovenso.innozu.io.yaml.concepts.{
   BusinessCapabilityYamlIO,
   DataObjectYamlIO,
   EnterpriseYamlIO,
+  ItContainerYamlIO,
   ItPlatformYamlIO,
   ItSystemIntegrationYamlIO,
   ItSystemYamlIO,
@@ -728,5 +729,245 @@ class YamlDeserializationSpec extends AnyFlatSpec {
     assert(townPlan.systems.size == 2)
     ItSystemIntegrationYamlIO.read(data)
     assert(townPlan.systemIntegrations.size == 1)
+  }
+
+  it should "read containers from YAML" in new EnterpriseArchitectureContext {
+    val yml = """containers:
+                |- key: database_1
+                |  sortKey: '000000035'
+                |  type: database
+                |  title: Omittam leo
+                |  description:
+                |  - mandamus efficiantur porta has mnesarchum vituperata quas ea aliquet invenire
+                |    viverra gloriatur nibh partiendo leo hinc quaestio dolorum repudiandae regione
+                |    oratio montes simul mattis alia repudiare harum explicari ocurreret altera aperiri
+                |    tractatos principes vitae justo eleifend magnis ullamcorper dissentiunt harum
+                |    patrioque postea cubilia docendi interesset conceptam epicuri ornatus inani noster
+                |    atomorum tacimates volumus mattis deseruisse mandamus phasellus quidam signiferumque
+                |    dicit arcu propriae perpetua justo habitasse maiestatis constituto reformidans
+                |    offendit ea condimentum ligula ex dicit ornare lectus turpis inciderint velit
+                |    definitionem suspendisse ultricies noster consul
+                |  - disputationi deterruisset leo mazim adhuc sonet pertinax eum atomorum consetetur
+                |    dolor sed bibendum numquam populo justo cursus fames errem luctus magna salutatus
+                |    populo fames et expetendis platonem doming mediocritatem recteque constituam iriure
+                |    hendrerit vix iaculis discere mandamus pericula similique alienum platea sententiae
+                |    alterum ei eros pertinacia gubergren mel atqui amet per decore latine offendit
+                |    sapien semper mediocrem labores detraxit gravida quis feugiat iriure perpetua
+                |    posse nascetur dicta mattis inani luctus theophrastus semper aliquip intellegat
+                |    eu falli sollicitudin vituperata quam ex
+                |  links:
+                |  - type: Architecture Documentation
+                |    url: https://search.yahoo.com/search?p=nominavi
+                |    title: Qualisque
+                |  - type: Development URL
+                |    url: https://search.yahoo.com/search?p=nullam
+                |    title: Libero Sadipscing
+                |  - type: Website
+                |    url: https://www.google.com/#q=primis
+                |    title: Dicat vim
+                |  swot:
+                |    strengths:
+                |    - duo periculis tantas consetetur novum est lorem dico mediocrem cras blandit
+                |      platea docendi
+                |    - tincidunt definitionem dui accommodare tellus graecis auctor sale elit sociosqu
+                |      iusto inceptos equidem lectus deterruisset tristique turpis malorum mediocrem
+                |      pertinacia commodo nisl himenaeos corrumpit dolorum has esse postulant invidunt
+                |      enim splendide a deseruisse esse vix menandri discere aliquid cu latine dicunt
+                |      conubia egestas odio veniam metus aliquam dico sententiae postulant ei porro
+                |      corrumpit tibique aptent
+                |    - movet nominavi putent wisi mediocritatem percipit dicta vero contentiones ponderum
+                |      vivamus augue quas tincidunt prodesset vis
+                |    - porttitor constituto audire legimus ligula dico sapientem nibh vivendo nisl
+                |      id turpis tantas referrentur harum persequeris aliquet mentitum consetetur alterum
+                |      convallis ocurreret corrumpit fabulas adversarium option lectus cursus vel utamur
+                |      deserunt efficitur propriae electram eget nulla lacinia honestatis definitionem
+                |      minim justo sententiae malesuada dico dolore nonumes ante maecenas ius quisque
+                |      adhuc veniam has delicata pericula perpetua imperdiet commune eget lectus aliquid
+                |      fugit
+                |    - iaculis duis impetus fabulas sapientem mediocritatem eam mel dolore arcu mentitum
+                |      gravida graeci veniam corrumpit class omnesque curabitur delicata ludus ullamcorper
+                |      curabitur sadipscing comprehensam curae sanctus harum vulputate sociis leo id
+                |      tellus fugit platonem in voluptaria eruditi mei pro accommodare iriure taciti
+                |      epicuri odio et venenatis ponderum tortor
+                |    weaknesses:
+                |    - nonumes inciderint feugiat decore posse malorum repudiandae corrumpit molestiae
+                |      cras quam curabitur tempus donec te meliore cu disputationi accusata qualisque
+                |      eloquentiam et mattis inani eget adipisci eius iriure eu justo ei repudiare
+                |      utamur iaculis dico mel vestibulum ponderum sadipscing diam sanctus convallis
+                |      phasellus suavitate interdum habitasse placerat imperdiet harum curabitur repudiandae
+                |      natum deseruisse propriae corrumpit agam sumo consectetuer ultrices viverra
+                |      aptent saperet numquam audire graeco omnesque elit sumo potenti mattis intellegebat
+                |      civibus etiam mollis docendi senserit donec velit lacinia autem eleifend altera
+                |      vocibus vel
+                |    opportunities:
+                |    - invenire mollis causae montes pro nam fugit erat sollicitudin hinc eu veritus
+                |      nisl veritus ultricies purus interesset expetenda primis intellegat saepe adipisci
+                |      disputationi natoque dictumst mutat varius duo tota ultrices meliore senectus
+                |      definiebas atomorum vel aptent integer ultricies dicunt sapientem interdum maiestatis
+                |      melius eam posse habitasse dicit adipisci comprehensam cursus vis cubilia erroribus
+                |      disputationi quaestio delenit menandri nascetur mediocrem efficitur dicunt invidunt
+                |      utroque epicuri voluptatibus netus arcu voluptatibus porro vehicula leo enim
+                |      delenit accusata tempor porttitor audire vivamus tantas non gubergren
+                |    - placerat utinam dicam inani dictum tortor quidam animal ullamcorper eum nostrum
+                |      eripuit accommodare urna odio fringilla cursus liber accusata auctor turpis
+                |      maximus ludus nihil interdum error erat erroribus penatibus mentitum honestatis
+                |      accusata fringilla ipsum dissentiunt quas vocent eget ut eirmod delicata graeco
+                |      epicuri pro recteque porttitor pellentesque ad offendit quaeque quot doming
+                |      solum ubique commodo amet dictumst habitasse imperdiet vero partiendo graeco
+                |      eruditi tincidunt massa accumsan persecuti referrentur maecenas hendrerit dapibus
+                |      platea pericula cubilia ius te possit no aliquid nostrum appareat utinam
+                |    threats:
+                |    - te sagittis viderer cursus postulant vero veniam pri reque sed interdum regione
+                |      menandri pellentesque recteque commune tellus ridens audire neque pericula utinam
+                |      propriae alienum gravida erroribus mentitum ad alienum mutat dolore noster feugiat
+                |      legimus porta facilisi dolorum amet intellegat potenti mediocritatem utamur
+                |      nisl tractatos fermentum ubique laoreet deseruisse constituam vituperata efficiantur
+                |      fuisset quot ancillae alterum vim omittam sadipscing donec referrentur sea ius
+                |      ponderum iuvaret cras saepe veri vituperata error dico mucius metus integer
+                |      risus porro libris ante senectus impetus aptent reque aptent elit sonet maluisset
+                |      viris consequat suas autem partiendo atqui rhoncus posse
+                |    - efficiantur ponderum mnesarchum dolore aperiri sea singulis constituam montes
+                |      perpetua sagittis ponderum fuisset volutpat libris vehicula
+                |  migrate: eum propriae honestatis primis partiendo tale feugiat instructior epicuri
+                |    mediocrem instructior viderer sociis epicurei tibique vis nisl solum mucius nullam
+                |    postulant antiopam efficiantur vidisse ornare qui sale sit senectus cursus elementum
+                |    oratio esse prompta possit ridens affert erroribus molestie magnis hac tempor
+                |    usu faucibus assueverit at maiestatis
+                |  criticality:
+                |    level: Catastrophic
+                |    consequences: metus vulputate elementum te maiorum viris auctor penatibus alia
+                |      quisque ex libero nec tale vitae justo patrioque quisque dissentiunt dictumst
+                |      dolorem docendi quaestio posse potenti magna fusce falli elit iaculis vituperata
+                |      recteque suas repudiare consul curabitur dictumst neglegentur deseruisse gloriatur
+                |      lobortis verterem dolor malesuada pretium aenean ad diam ferri audire evertitur
+                |      hac vocibus quem persequeris prodesset ceteros efficiantur explicari antiopam
+                |      lobortis etiam necessitatibus eam a theophrastus ornatus ne tale percipit dictumst
+                |      urna sumo repudiare ferri no evertitur senserit volumus quidam ut deserunt electram
+                |      theophrastus enim
+                |  externalIds:
+                |  - system: an
+                |    id: fa101090_e9ba_4c39_996c_3566c2cbddbe
+                |  - system: delectus
+                |    id: 8c45e88b_5e74_4f33_b174_6056f9db455c
+                |  - system: urna
+                |    id: 6164e680_3bee_4591_b7ee_dff85b402eb9
+                |  - system: vivamus
+                |    id: a22cdb91_ebbf_47dc_8c71_81c2af671ecd
+                |  fatherTime:
+                |  - date: '1008-09-12'
+                |    event: In Preproduction
+                |    description: comprehensam mel usu quisque eam ridiculus ne viverra noster vocibus
+                |      cum voluptatibus placerat iriure scelerisque labores elit aliquet possit sumo
+                |      qui vivendo oratio neglegentur consequat delectus natoque platonem ut labores
+                |      delicata quidam theophrastus mel habitasse ullamcorper neque maiorum maximus
+                |      suas fabellas petentium eget ludus dignissim platonem tristique atomorum electram
+                |      graeci interpretaris elitr pertinacia duo cras errem harum fringilla
+                |  - date: '1165-02-08'
+                |    event: Done
+                |    description: sociis suavitate lorem dicunt accusata maiestatis posuere maximus
+                |      facilis inimicus amet utamur efficiantur dignissim morbi duis debet persius
+                |      equidem solum gubergren sonet aliquip altera tale lorem saepe dicunt populo
+                |      postea detraxit petentium mediocrem doming regione augue possim tamquam dolore
+                |      suas oratio agam interesset voluptatibus intellegat mazim intellegebat tacimates
+                |      no bibendum ut magnis a litora melius menandri movet viris iisque luptatum
+                |  - date: '1367-05-27'
+                |    event: In Production
+                |    description: omittantur equidem invenire graece falli libris error platea populo
+                |      fringilla iuvaret nam efficitur nascetur deserunt urna lacinia sanctus voluptatibus
+                |      civibus sanctus malesuada fuisset
+                |  - date: '1571-02-03'
+                |    event: Started
+                |    description: convenire conubia tibique habitant dui detracto ignota suscipiantur
+                |      volumus eros veritus alienum causae habitant accumsan leo aliquip tristique
+                |      interesset falli tortor senectus dicunt delenit vocent inciderint populo delenit
+                |      ridens tellus magna ea quaestio adolescens veritus odio duis sonet epicuri solet
+                |      persequeris turpis imperdiet commodo equidem fuisset integer ea platonem prompta
+                |      vocibus epicurei graeci dicant libero venenatis elaboraret primis suas id impetus
+                |      neglegentur consectetur ad molestiae ex iisque augue dictum quem dictumst fermentum
+                |      quaeque nibh verear cum mea in vero prodesset aeque legere dui lacinia definiebas
+                |      volutpat aliquet dis neglegentur mattis aeque qualisque rhoncus ceteros urna
+                |      vix dolores netus
+                |  - date: '2145-06-09'
+                |    event: Due
+                |    description: mnesarchum posse mus vel posuere class nostra litora docendi nulla
+                |      noster quis appareat dignissim detracto tale natum putent aliquip molestiae
+                |      sea himenaeos adipiscing viris aliquid hac sadipscing intellegat ocurreret nam
+                |      solet fringilla dui blandit harum rhoncus habemus definitionem justo posuere
+                |      recteque malorum et his eius finibus delenit ligula habitant sale
+                |  - date: '2356-11-02'
+                |    event: Life Event
+                |    description: an utinam quidam amet persequeris platonem nobis error
+                |  - date: '2401-12-07'
+                |    event: Conceived
+                |    description: reformidans semper rutrum causae offendit vulputate accumsan interesset
+                |      ullamcorper odio reformidans vituperatoribus saepe wisi ei impetus finibus maximus
+                |      feugiat movet agam sem
+                |  - date: '2503-04-04'
+                |    event: Active
+                |    description: fermentum disputationi pri malesuada magnis nisl vivamus nullam lorem
+                |      et debet verear offendit vehicula molestiae postea rhoncus fugit verterem
+                |  - date: '2575-03-08'
+                |    event: Retired
+                |    description: mus repudiare ancillae congue netus convallis quam corrumpit voluptatibus
+                |      postulant
+                |  - date: '0537-11-21'
+                |    event: In Development
+                |    description: eripuit maximus eam referrentur aeque lectus malesuada eam pulvinar
+                |      honestatis posuere ceteros eos no dicat expetenda instructior quaestio commune
+                |      novum
+                |  - date: '0609-09-25'
+                |    event: Decommissioned
+                |    description: vel pertinax rutrum interdum praesent conceptam iriure vestibulum
+                |      solet congue reque ridens posse definitionem est vivendo ornare lobortis dis
+                |      montes tamquam iudicabit sumo solet vix felis mollis affert nostra idque dicant
+                |      vivamus sollicitudin malesuada odio nobis periculis vidisse posidonium appetere
+                |      mandamus et oratio vivamus quot saperet rhoncus penatibus an ipsum finibus postulant
+                |      scelerisque ea adhuc an viverra euripidis porttitor neque tempus efficitur quis
+                |      vocibus pertinax ridens persecuti senserit dictumst donec expetendis sanctus
+                |      magna ac dicunt honOAestatis pellentesque placerat graeco magnis dicant est parturient
+                |      idque sed deserunt maximus maximus inceptos mnesarchum risus quot novum tota
+                |      donec
+                |  resilience:
+                |  - facilis suas doctus vituperata fuisset phasellus eruditi quam justo alia dissentiunt
+                |    errem disputationi noluisse definiebas commodo ubique est invenire pro enim mollis
+                |    scelerisque his morbi theophrastus necessitatibus tempus suavitate iusto eleifend
+                |    diam dico eleifend graecis quis arcu sanctus reprehendunt sanctus fames invidunt
+                |    eleifend finibus volumus et nascetur neque conceptam aliquet tation turpis litora
+                |    an simul ipsum tale latine non solum commune usu suscipiantur elementum pertinacia
+                |    posuere tristique has consul populo pri malesuada voluptatum laoreet evertitur
+                |    graeci consectetur pertinax oporteat adhuc deseruisse oratio sociosqu novum singulis
+                |    his velit
+                |  api:
+                |    style:
+                |      title: REST
+                |      description: Typical REST API
+                |    scope:
+                |      title: VPN
+                |      description: Only accessible through VPN
+                |    authentication:
+                |      title: OAuth
+                |      description: protected with Auth0
+                |    ddos:
+                |      title: CloudFlare
+                |      description: Using CloudFlare shield
+                |    rateLimiting:
+                |      title: through API Gateway
+                |      description: AWS API Gateway to be exact
+                |""".stripMargin
+    val data: YamlJavaData = yaml.load(yml).asInstanceOf[YamlJavaData]
+    println(data)
+    ItContainerYamlIO.read(data)
+    assert(townPlan.containers.size == 1)
+    println(townPlan.container(Key.fromString("database_1")).map(_.api))
+    assert(
+      townPlan
+        .container(Key.fromString("database_1"))
+        .exists(d =>
+          d.api.exists(a =>
+            a.ddoSProtection.title.toLowerCase == "cloudflare" && a.rateLimiting.title.toLowerCase == "through api gateway" && a.authentication.title.toLowerCase == "oauth" && a.scope.title.toLowerCase == "vpn" && a.style.title.toLowerCase == "rest"
+          )
+        )
+    )
+
   }
 }

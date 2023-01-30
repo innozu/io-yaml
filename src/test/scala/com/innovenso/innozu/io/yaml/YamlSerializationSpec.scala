@@ -6,6 +6,7 @@ import com.innovenso.innozu.io.yaml.concepts.{
   BusinessCapabilityYamlIO,
   DataObjectYamlIO,
   EnterpriseYamlIO,
+  ItContainerYamlIO,
   ItPlatformYamlIO,
   ItSystemIntegrationYamlIO,
   ItSystemYamlIO,
@@ -18,11 +19,14 @@ import com.innovenso.townplanner.model.concepts.{
   Actor,
   ArchitectureBuildingBlock,
   BusinessCapability,
+  Database,
   Enterprise,
   Entity,
+  ItContainer,
   ItPlatform,
   ItSystem,
   ItSystemIntegration,
+  Microservice,
   Organisation,
   Person,
   PlatformLayer,
@@ -108,5 +112,12 @@ class YamlSerializationSpec extends AnyFlatSpec {
       }
 
     println(serialize(ItSystemIntegrationYamlIO.write(List(integration))))
+  }
+
+  it should "serialize IT Containers" in new EnterpriseArchitectureContext {
+    val container1: ItContainer = ea hasRandomContainer Microservice()
+    val container2: ItContainer = ea hasRandomContainer Database()
+    println(townPlan)
+    println(serialize(ItContainerYamlIO.write(List(container1, container2))))
   }
 }

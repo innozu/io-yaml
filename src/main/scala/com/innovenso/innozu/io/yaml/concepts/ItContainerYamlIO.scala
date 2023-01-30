@@ -25,6 +25,7 @@ object ItContainerYamlIO extends ModelComponentYamlIO[ItContainer] {
         .readMany(data)
         .foreach(fatherTime => it has fatherTime on fatherTime.date)
       ResilienceMeasureYamlIO.readMany(data).foreach(r => it provides r)
+      APIYamlIO.readOne(data).foreach(it.has)
     }
 
     val sortKey: SortKey = readSortKey(data)
@@ -34,7 +35,24 @@ object ItContainerYamlIO extends ModelComponentYamlIO[ItContainer] {
       )
     container.map {
       case m: Microservice => ea describes m as { it => body.apply(it) }
-      case d: Database => 
+      case d: Database     => ea describes d as { it => body.apply(it) }
+      case s: Service      => ea describes s as { it => body.apply(it) }
+      case f: Function     => ea describes f as { it => body.apply(it) }
+      case f: Filesystem   => ea describes f as { it => body.apply(it) }
+      case q: Queue        => ea describes q as { it => body.apply(it) }
+      case t: Topic        => ea describes t as { it => body.apply(it) }
+      case e: EventStream  => ea describes e as { it => body.apply(it) }
+      case g: Gateway      => ea describes g as { it => body.apply(it) }
+      case p: Proxy        => ea describes p as { it => body.apply(it) }
+      case f: Firewall     => ea describes f as { it => body.apply(it) }
+      case c: Cache        => ea describes c as { it => body.apply(it) }
+      case w: WebUI        => ea describes w as { it => body.apply(it) }
+      case m: MobileUI     => ea describes m as { it => body.apply(it) }
+      case d: DesktopUI    => ea describes d as { it => body.apply(it) }
+      case w: WatchUI      => ea describes w as { it => body.apply(it) }
+      case t: TerminalUI   => ea describes t as { it => body.apply(it) }
+      case s: SmartTVUI    => ea describes s as { it => body.apply(it) }
+      case b: Batch        => ea describes b as { it => body.apply(it) }
     }.get
   }
 

@@ -4,6 +4,7 @@ import com.innovenso.innozu.io.yaml.YamlIO
 import com.innovenso.innozu.io.yaml.concepts.BusinessCapabilityYamlIO.withMap
 import com.innovenso.innozu.io.yaml.concepts.EnterpriseYamlIO.YamlJavaData
 import com.innovenso.innozu.io.yaml.properties.{
+  APIYamlIO,
   ArchitectureVerdictYamlIO,
   CriticalityYamlIO,
   DataAttributeYamlIO,
@@ -23,6 +24,7 @@ import com.innovenso.townplanner.model.concepts.Enterprise
 import com.innovenso.townplanner.model.concepts.properties.{
   ArchitectureVerdict,
   CanConfigureTitle,
+  HasAPI,
   HasArchitectureVerdict,
   HasCriticality,
   HasDataAttributes,
@@ -121,6 +123,10 @@ trait ModelComponentYamlIO[ModelComponentType <: ModelComponent]
       case hasPlatformLayerProperties: HasPlatformLayerProperties =>
         PlatformLayerPropertyYamlIO.write(hasPlatformLayerProperties, map)
       case _ =>
+    }
+    modelComponent match {
+      case hasAPI: HasAPI => APIYamlIO.write(hasAPI, map)
+      case _              =>
     }
   }
 
