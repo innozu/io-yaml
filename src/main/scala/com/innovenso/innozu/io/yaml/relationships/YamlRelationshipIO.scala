@@ -78,6 +78,6 @@ trait YamlRelationshipIO[
   def readMany(
       data: YamlJavaData,
       source: RelationshipSourceType
-  ): List[RelationshipType] =
-    readMaps(data, KEY).flatMap(m => readOne(m, source))
+  ): Unit =
+    readMaps(data, KEY).flatMap(m => readOne(m, source)).foreach(RelationshipBuffer.add)
 }

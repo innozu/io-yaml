@@ -15,6 +15,7 @@ import com.innovenso.innozu.io.yaml.concepts.{
   TeamYamlIO
 }
 import com.innovenso.innozu.io.yaml.properties.TitleYamlIO.YamlJavaData
+import com.innovenso.innozu.io.yaml.relationships.RelationshipBuffer
 import com.innovenso.townplanner.model.concepts.Enterprise
 import com.innovenso.townplanner.model.concepts.properties.PublicData
 import com.innovenso.townplanner.model.meta.Key
@@ -1524,6 +1525,7 @@ class YamlDeserializationSpec extends AnyFlatSpec {
     println(data)
     DataObjectYamlIO.read(data)
     ItSystemYamlIO.read(data)
+    RelationshipBuffer.save()
     println(townPlan.relationships)
   }
 }

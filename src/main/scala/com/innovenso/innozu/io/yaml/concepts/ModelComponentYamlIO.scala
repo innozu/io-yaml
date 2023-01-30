@@ -19,7 +19,11 @@ import com.innovenso.innozu.io.yaml.properties.{
   TagPropertyYamlIO,
   TitleYamlIO
 }
-import com.innovenso.innozu.io.yaml.relationships.AccessingYamlIO
+import com.innovenso.innozu.io.yaml.relationships.{
+  AccessingYamlIO,
+  AssociationYamlIO,
+  CompositionYamlIO
+}
 import com.innovenso.townplanner.model.EnterpriseArchitecture
 import com.innovenso.townplanner.model.concepts.Enterprise
 import com.innovenso.townplanner.model.concepts.properties.{
@@ -40,7 +44,11 @@ import com.innovenso.townplanner.model.concepts.properties.{
   HasTagProperties,
   HasTitle
 }
-import com.innovenso.townplanner.model.concepts.relationships.CanAccess
+import com.innovenso.townplanner.model.concepts.relationships.{
+  CanAccess,
+  CanBeAssociated,
+  CanBeComposedOf
+}
 import com.innovenso.townplanner.model.language.ModelComponent
 import com.innovenso.townplanner.model.meta.{Key, SortKey}
 
@@ -138,6 +146,16 @@ trait ModelComponentYamlIO[ModelComponentType <: ModelComponent]
       case canAccess: CanAccess => AccessingYamlIO.write(canAccess, map)
       case _                    =>
     }
+    modelComponent match {
+      case canBeAssociated: CanBeAssociated =>
+        AssociationYamlIO.write(canBeAssociated, map)
+      case _ =>
+    }
+    modelComponent match {
+      case canBeComposedOf: CanBeComposedOf =>
+        CompositionYamlIO.write(canBeComposedOf, map)
+      case _ =>
+    }
   }
 
   def read(data: YamlJavaData)(implicit
@@ -151,7 +169,7 @@ trait ModelComponentYamlIO[ModelComponentType <: ModelComponent]
           list.asScala
             .filter(_.isInstanceOf[YamlJavaData])
             .map(_.asInstanceOf[YamlJavaData])
-            .flatMap(d => withKey(d, key => readOne(d, key)))
+            .flatMap(d => withKey(d, key => readOneWithRelationships(d, key)))
             .toList
         case _ =>
           debug(s"no $KEY available")
@@ -162,6 +180,28 @@ trait ModelComponentYamlIO[ModelComponentType <: ModelComponent]
   def readOne(data: YamlJavaData, key: Key)(implicit
       ea: EnterpriseArchitecture
   ): ModelComponentType
+
+  private def readOneWithRelationships(data: YamlJavaData, key: Key)(implicit
+      ea: EnterpriseArchitecture
+  ): ModelComponentType = {
+    val modelComponent: ModelComponentType = readOne(data, key)
+    modelComponent match {
+      case c: CanAccess =>
+        AccessingYamlIO
+          .readMany(data, c)
+      case _ =>
+    }
+    modelComponent match {
+      case a: CanBeAssociated => AssociationYamlIO.readMany(data, a)
+      case _                  =>
+    }
+    modelComponent match {
+      case c: CanBeComposedOf => CompositionYamlIO.readMany(data, c)
+      case _                  =>
+    }
+
+    modelComponent
+  }
 
   def writeKeys(
       modelComponent: ModelComponent,
