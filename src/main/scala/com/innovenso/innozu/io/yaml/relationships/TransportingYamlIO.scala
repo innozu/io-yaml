@@ -2,24 +2,24 @@ package com.innovenso.innozu.io.yaml.relationships
 
 import com.innovenso.innozu.io.yaml.properties.TitleYamlIO
 import com.innovenso.townplanner.model.concepts.relationships.{
-  Association,
-  CanBeAssociated,
-  CanBeComposedOf,
-  Composition
+  CanTransport,
+  CanTrigger,
+  Transporting,
+  Trigger
 }
 import com.innovenso.townplanner.model.meta.Key
 
-object CompositionYamlIO
-    extends YamlRelationshipIO[Composition, CanBeComposedOf] {
-  override def KEY: String = "composedOf"
+object TransportingYamlIO
+    extends YamlRelationshipIO[Transporting, CanTransport] {
+  override def KEY: String = "transports"
 
-  override def theClass: Class[Composition] = classOf[Composition]
+  override def theClass: Class[Transporting] = classOf[Transporting]
 
   override def readOne(
-      data: CompositionYamlIO.YamlJavaData,
-      source: CanBeComposedOf
-  ): Option[Composition] = readString(data, "target").map(targetKey =>
-    Composition(
+      data: TransportingYamlIO.YamlJavaData,
+      source: CanTransport
+  ): Option[Transporting] = readString(data, "target").map(targetKey =>
+    Transporting(
       key =
         readString(data, "key").map(v => Key.fromString(v)).getOrElse(Key()),
       source = source.key,

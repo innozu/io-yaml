@@ -22,7 +22,22 @@ import com.innovenso.innozu.io.yaml.properties.{
 import com.innovenso.innozu.io.yaml.relationships.{
   AccessingYamlIO,
   AssociationYamlIO,
-  CompositionYamlIO
+  CompositionYamlIO,
+  ConsumingYamlIO,
+  DataRelationshipYamlIO,
+  DeliveryYamlIO,
+  FlowYamlIO,
+  ImplementationYamlIO,
+  InfluencingYamlIO,
+  KnowledgeYamlIO,
+  OwningYamlIO,
+  ProcessingYamlIO,
+  ProducingYamlIO,
+  RealizingYamlIO,
+  ServingYamlIO,
+  StakeholderYamlIO,
+  TransportingYamlIO,
+  TriggeringYamlIO
 }
 import com.innovenso.townplanner.model.EnterpriseArchitecture
 import com.innovenso.townplanner.model.concepts.Enterprise
@@ -47,7 +62,23 @@ import com.innovenso.townplanner.model.concepts.properties.{
 import com.innovenso.townplanner.model.concepts.relationships.{
   CanAccess,
   CanBeAssociated,
-  CanBeComposedOf
+  CanBeComposedOf,
+  CanBeFlowSource,
+  CanBeStakeholder,
+  CanConsume,
+  CanDeliver,
+  CanHaveDataRelationship,
+  CanImplement,
+  CanInfluence,
+  CanKnow,
+  CanOwn,
+  CanProcess,
+  CanProduce,
+  CanRealize,
+  CanServe,
+  CanTransport,
+  CanTrigger,
+  DataRelationship
 }
 import com.innovenso.townplanner.model.language.ModelComponent
 import com.innovenso.townplanner.model.meta.{Key, SortKey}
@@ -156,6 +187,81 @@ trait ModelComponentYamlIO[ModelComponentType <: ModelComponent]
         CompositionYamlIO.write(canBeComposedOf, map)
       case _ =>
     }
+    modelComponent match {
+      case canConsume: CanConsume =>
+        ConsumingYamlIO.write(canConsume, map)
+      case _ =>
+    }
+    modelComponent match {
+      case canHaveDataRelationship: CanHaveDataRelationship =>
+        DataRelationshipYamlIO.write(canHaveDataRelationship, map)
+      case _ =>
+    }
+    modelComponent match {
+      case canDeliver: CanDeliver =>
+        DeliveryYamlIO.write(canDeliver, map)
+      case _ =>
+    }
+    modelComponent match {
+      case canBeFlowSource: CanBeFlowSource =>
+        FlowYamlIO.write(canBeFlowSource, map)
+      case _ =>
+    }
+    modelComponent match {
+      case s: CanImplement =>
+        ImplementationYamlIO.write(s, map)
+      case _ =>
+    }
+    modelComponent match {
+      case s: CanInfluence =>
+        InfluencingYamlIO.write(s, map)
+      case _ =>
+    }
+    modelComponent match {
+      case s: CanKnow =>
+        KnowledgeYamlIO.write(s, map)
+      case _ =>
+    }
+    modelComponent match {
+      case s: CanOwn =>
+        OwningYamlIO.write(s, map)
+      case _ =>
+    }
+    modelComponent match {
+      case s: CanProcess =>
+        ProcessingYamlIO.write(s, map)
+      case _ =>
+    }
+    modelComponent match {
+      case s: CanProduce =>
+        ProducingYamlIO.write(s, map)
+      case _ =>
+    }
+    modelComponent match {
+      case s: CanRealize =>
+        RealizingYamlIO.write(s, map)
+      case _ =>
+    }
+    modelComponent match {
+      case s: CanServe =>
+        ServingYamlIO.write(s, map)
+      case _ =>
+    }
+    modelComponent match {
+      case s: CanBeStakeholder =>
+        StakeholderYamlIO.write(s, map)
+      case _ =>
+    }
+    modelComponent match {
+      case s: CanTransport =>
+        TransportingYamlIO.write(s, map)
+      case _ =>
+    }
+    modelComponent match {
+      case s: CanTrigger =>
+        TriggeringYamlIO.write(s, map)
+      case _ =>
+    }
   }
 
   def read(data: YamlJavaData)(implicit
@@ -198,6 +304,80 @@ trait ModelComponentYamlIO[ModelComponentType <: ModelComponent]
     modelComponent match {
       case c: CanBeComposedOf => CompositionYamlIO.readMany(data, c)
       case _                  =>
+    }
+    modelComponent match {
+      case c: CanConsume => ConsumingYamlIO.readMany(data, c)
+      case _             =>
+    }
+    modelComponent match {
+      case d: CanHaveDataRelationship =>
+        DataRelationshipYamlIO.readMany(data, d)
+      case _ =>
+    }
+    modelComponent match {
+      case d: CanDeliver =>
+        DeliveryYamlIO.readMany(data, d)
+      case _ =>
+    }
+    modelComponent match {
+      case d: CanBeFlowSource =>
+        FlowYamlIO.readMany(data, d)
+      case _ =>
+    }
+    modelComponent match {
+      case d: CanImplement =>
+        ImplementationYamlIO.readMany(data, d)
+      case _ =>
+    }
+    modelComponent match {
+      case d: CanInfluence =>
+        InfluencingYamlIO.readMany(data, d)
+      case _ =>
+    }
+    modelComponent match {
+      case d: CanKnow =>
+        KnowledgeYamlIO.readMany(data, d)
+      case _ =>
+    }
+    modelComponent match {
+      case d: CanOwn =>
+        OwningYamlIO.readMany(data, d)
+      case _ =>
+    }
+    modelComponent match {
+      case d: CanProcess =>
+        ProcessingYamlIO.readMany(data, d)
+      case _ =>
+    }
+    modelComponent match {
+      case d: CanProduce =>
+        ProducingYamlIO.readMany(data, d)
+      case _ =>
+    }
+    modelComponent match {
+      case d: CanRealize =>
+        RealizingYamlIO.readMany(data, d)
+      case _ =>
+    }
+    modelComponent match {
+      case d: CanServe =>
+        ServingYamlIO.readMany(data, d)
+      case _ =>
+    }
+    modelComponent match {
+      case d: CanBeStakeholder =>
+        StakeholderYamlIO.readMany(data, d)
+      case _ =>
+    }
+    modelComponent match {
+      case d: CanTrigger =>
+        TriggeringYamlIO.readMany(data, d)
+      case _ =>
+    }
+    modelComponent match {
+      case d: CanTransport =>
+        TransportingYamlIO.readMany(data, d)
+      case _ =>
     }
 
     modelComponent

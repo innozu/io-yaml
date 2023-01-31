@@ -20,7 +20,7 @@ import com.innovenso.townplanner.model.meta.Key
 import scala.jdk.CollectionConverters.SeqHasAsJava
 
 object AccessingYamlIO extends YamlRelationshipIO[Accessing, CanAccess] {
-  override def KEY: String = "accessing"
+  override def KEY: String = "accesses"
   override def theClass: Class[Accessing] = classOf[Accessing]
 
   override def readOne(
