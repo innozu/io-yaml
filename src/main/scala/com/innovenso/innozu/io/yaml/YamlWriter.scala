@@ -1,47 +1,17 @@
 package com.innovenso.innozu.io.yaml
 
-import com.innovenso.innozu.io.yaml.concepts.{
-  ActorYamlIO,
-  ArchitectureBuildingBlockYamlIO,
-  BusinessCapabilityYamlIO,
-  DataObjectYamlIO,
-  EnterpriseYamlIO,
-  ItContainerYamlIO,
-  ItPlatformYamlIO,
-  ItSystemIntegrationYamlIO,
-  ItSystemYamlIO,
-  OrganisationYamlIO,
-  PersonYamlIO,
-  TagYamlIO,
-  TeamYamlIO
-}
 import com.innovenso.innozu.io.yaml.concepts.TagYamlIO.YamlJavaData
+import com.innovenso.innozu.io.yaml.concepts._
 import com.innovenso.townplanner.model.EnterpriseArchitecture
-import com.innovenso.townplanner.model.concepts.{
-  Actor,
-  AggregateRoot,
-  Command,
-  Entity,
-  Event,
-  Organisation,
-  Person,
-  Projection,
-  Query,
-  Team,
-  ValueObject
-}
+import com.innovenso.townplanner.model.concepts._
 import fish.genius.logging.Loggable
 import org.yaml.snakeyaml.{DumperOptions, Yaml}
 
 import java.io.{File, PrintWriter}
 import java.nio.file.Path
-import scala.annotation.unused
 import scala.util.{Failure, Success, Try}
 
-object YamlWriter extends Loggable {
-  val options = new DumperOptions()
-  options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK)
-  val yaml: Yaml = new Yaml(options)
+object YamlWriter extends Loggable with HasSnakeYaml {
 
   def write()(implicit ea: EnterpriseArchitecture): Option[File] =
     inDirectory(Path.of("./yaml/")) { directory =>
