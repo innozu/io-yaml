@@ -2,7 +2,7 @@ import sbt._
 
 object Dependencies {
   object Testing {
-    private val _version = "3.2.14"
+    private val _version = "3.2.15"
     final val * = Seq(
       "org.scalactic" %% "scalactic" % _version,
       "org.scalatest" %% "scalatest" % _version % Test
@@ -32,5 +32,23 @@ object Dependencies {
   object Innozu {
     final val model = "com.innovenso" %% "innozu-model" % "1.6.2"
     final val * = Seq(model)
+  }
+
+  object Json {
+    val _version = "2.17.9"
+    final val * = Def
+      .setting(
+        Seq(
+          // Use the %%% operator instead of %% for Scala.js and Scala Native
+          "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-core" % _version,
+          // Use the "provided" scope instead when the "compile-internal" scope is not supported
+          "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-macros" % _version % "provided"
+        )
+      )
+  }
+
+  object HttpClient {
+    final val requests = "com.lihaoyi" %% "requests" % "0.8.0"
+    final val * = Seq(requests)
   }
 }

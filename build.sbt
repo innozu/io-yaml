@@ -42,7 +42,8 @@ lazy val root = project
     libraryDependencies ++= Dependencies.Lorem.*,
     libraryDependencies ++= Dependencies.GeniusFish.*,
     libraryDependencies ++= Dependencies.Innozu.*,
-    libraryDependencies ++= Dependencies.Yaml.*
+    libraryDependencies ++= Dependencies.Yaml.*,
+    libraryDependencies ++= Dependencies.HttpClient.*
   )
 
 addCommandAlias("deploy", "publishLocal;publish")

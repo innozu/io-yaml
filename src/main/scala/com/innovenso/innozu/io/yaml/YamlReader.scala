@@ -16,10 +16,12 @@ import com.innovenso.innozu.io.yaml.concepts.{
   TeamYamlIO
 }
 import com.innovenso.innozu.io.yaml.relationships.RelationshipBuffer
+import com.innovenso.innozu.io.yaml.util.FileUtils
 import com.innovenso.townplanner.model.EnterpriseArchitecture
 import fish.genius.logging.Loggable
 
 import java.io.{File, FileInputStream}
+import java.nio.file.Files
 
 object YamlReader extends Loggable with HasSnakeYaml {
   private var sources: List[File] = Nil
@@ -28,6 +30,27 @@ object YamlReader extends Loggable with HasSnakeYaml {
     case d: File if d.isDirectory => addFiles(d.listFiles().toList)
     case f: File if f.canRead     => sources = f :: sources
     case _                        =>
+  }
+
+  def fromGithub(
+      organisation: String,
+      repository: String,
+      branch: String,
+      file: String,
+      accessToken: String
+  ): Unit = {
+    val url =
+      s"https://raw.githubusercontent.com/$organisation/$repository/$branch/$file"
+    val response = requests.get(
+      url,
+      headers = Map(
+        "Authorization" -> s"token $accessToken",
+        "Accept" -> "application/vnd.github.v3.raw"
+      )
+    )
+    val ymlText = response.text()
+    val ymlFile = Files.createTempFile("yml", "read")
+    FileUtils.writeStringToFile(ymlText, ymlFile.toFile).foreach(f => add(f))
   }
 
   private def addFiles(yamlFiles: List[File]): Unit =
@@ -58,4 +81,6 @@ object YamlReader extends Loggable with HasSnakeYaml {
     ItContainerYamlIO.read(data)
     ItSystemIntegrationYamlIO.read(data)
   }
+
+  def listSources(): Unit = sources.foreach(s => println(s.getAbsolutePath))
 }
