@@ -12,7 +12,9 @@ import com.innovenso.innozu.io.yaml.concepts.{
   ItSystemYamlIO,
   OrganisationYamlIO,
   PersonYamlIO,
-  TeamYamlIO
+  PlatformLayerYamlIO,
+  TeamYamlIO,
+  TechnologyYamlIO
 }
 import com.innovenso.townplanner.model.concepts.properties.Title
 import com.innovenso.townplanner.model.concepts.relationships.Accessing
@@ -24,16 +26,21 @@ import com.innovenso.townplanner.model.concepts.{
   Database,
   Enterprise,
   Entity,
+  Framework,
   ItContainer,
   ItPlatform,
   ItSystem,
   ItSystemIntegration,
+  Language,
   Microservice,
   Organisation,
   Person,
+  Platform,
   PlatformLayer,
   Tag,
   Team,
+  Technique,
+  Tool,
   ValueObject
 }
 import com.innovenso.townplanner.model.samples
@@ -121,6 +128,26 @@ class YamlSerializationSpec extends AnyFlatSpec {
     val container2: ItContainer = ea hasRandomContainer Database()
     println(townPlan)
     println(serialize(ItContainerYamlIO.write(List(container1, container2))))
+  }
+
+  it should "serialize Technologies" in new EnterpriseArchitectureContext {
+    val tool: Tool = ea hasRandomTech Tool()
+    val technique: Technique = ea hasRandomTech Technique()
+    val language: Language = ea hasRandomTech Language()
+    val framework: Framework = ea hasRandomTech Framework()
+    val platform: Platform = ea hasRandomTech Platform()
+    println(
+      serialize(
+        TechnologyYamlIO.write(
+          List(tool, technique, language, framework, platform)
+        )
+      )
+    )
+  }
+
+  it should "serialize platform layers" in new EnterpriseArchitectureContext {
+    val layer: PlatformLayer = ea hasRandom PlatformLayer()
+    println(serialize(PlatformLayerYamlIO.write(List(layer))))
   }
 
   it should "serialize Accessing relationships" in new EnterpriseArchitectureContext {

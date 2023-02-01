@@ -13,7 +13,9 @@ import com.innovenso.innozu.io.yaml.concepts.{
   ItSystemYamlIO,
   OrganisationYamlIO,
   PersonYamlIO,
-  TeamYamlIO
+  PlatformLayerYamlIO,
+  TeamYamlIO,
+  TechnologyYamlIO
 }
 import com.innovenso.innozu.io.yaml.relationships.RelationshipBuffer
 import com.innovenso.innozu.io.yaml.util.FileUtils
@@ -70,6 +72,7 @@ object YamlReader extends Loggable with HasSnakeYaml {
     val data: YamlJavaData = yaml.load(inputStream)
     EnterpriseYamlIO.read(data)
     BusinessCapabilityYamlIO.read(data)
+    TechnologyYamlIO.read(data)
     ActorYamlIO.read(data)
     PersonYamlIO.read(data)
     TeamYamlIO.read(data)
@@ -77,6 +80,7 @@ object YamlReader extends Loggable with HasSnakeYaml {
     ArchitectureBuildingBlockYamlIO.read(data)
     DataObjectYamlIO.read(data)
     ItPlatformYamlIO.read(data)
+    PlatformLayerYamlIO.read(data)
     ItSystemYamlIO.read(data)
     ItContainerYamlIO.read(data)
     ItSystemIntegrationYamlIO.read(data)

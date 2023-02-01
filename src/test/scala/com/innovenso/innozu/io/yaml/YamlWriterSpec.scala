@@ -17,16 +17,22 @@ import com.innovenso.townplanner.model.concepts.{
   Enterprise,
   Entity,
   Event,
+  Framework,
   ItPlatform,
   ItSystem,
   ItSystemIntegration,
+  Language,
   Microservice,
   Organisation,
   Person,
+  Platform,
+  PlatformLayer,
   Projection,
   Query,
   Tag,
   Team,
+  Technique,
+  Tool,
   ValueObject
 }
 import fish.genius.logging.Loggable
@@ -102,6 +108,14 @@ class YamlWriterSpec extends AnyFlatSpec with Loggable {
       }
 
     -->(s"integrations: ${townPlan.systemIntegrations}")
+
+    val tool: Tool = ea hasRandomTech Tool()
+    val technique: Technique = ea hasRandomTech Technique()
+    val language: Language = ea hasRandomTech Language()
+    val framework: Framework = ea hasRandomTech Framework()
+    val platform: Platform = ea hasRandomTech Platform()
+
+    val layer: PlatformLayer = ea hasRandom PlatformLayer()
 
     val outputDirectory = YamlWriter.write()
     assert(outputDirectory.nonEmpty)

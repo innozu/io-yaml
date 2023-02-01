@@ -6,5 +6,4 @@ trait HasSnakeYaml {
   val options = new DumperOptions()
   options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK)
   val yaml: Yaml = new Yaml(options)
-
 }

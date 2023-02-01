@@ -22,6 +22,9 @@ object YamlWriter extends Loggable with HasSnakeYaml {
       writeYaml(directory, "business-capabilities.yaml")(
         BusinessCapabilityYamlIO.write(ea.townPlan.businessCapabilities)
       )
+      writeYaml(directory, "technology-radar.yaml")(
+        TechnologyYamlIO.write(ea.townPlan.technologies)
+      )
       inDirectory(new File(directory, "actors").toPath) { actorDirectory =>
         writeYaml(actorDirectory, "actors.yaml")(
           ActorYamlIO.write(ea.townPlan.components(classOf[Actor]))
@@ -70,6 +73,9 @@ object YamlWriter extends Loggable with HasSnakeYaml {
       }
       writeYaml(directory, "platforms.yaml")(
         ItPlatformYamlIO.write(ea.townPlan.platforms)
+      )
+      writeYaml(directory, "platform-layers.yaml")(
+        PlatformLayerYamlIO.write(ea.townPlan.platformLayers)
       )
       inDirectory(new File(directory, "systems").toPath) { systemDirectory =>
         ea.townPlan.systems.foreach(itSystem => {
