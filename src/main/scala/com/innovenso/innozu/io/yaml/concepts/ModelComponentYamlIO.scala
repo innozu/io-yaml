@@ -389,7 +389,6 @@ trait ModelComponentYamlIO[ModelComponentType <: ModelComponent]
   ): Unit = {
     debug(s"writing model component properties: key and sortKey")
     data.put("key", modelComponent.key.value)
-    modelComponent.sortKey.value.foreach(sk => data.put("sortKey", sk))
   }
 
   def writeExtraProperties(
