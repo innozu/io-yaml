@@ -13,4 +13,6 @@ object RelationshipBuffer {
     relationships.foreach(ea.hasRelationship)
     relationships = Nil
   }
+
+  def clear()(implicit ea: EnterpriseArchitecture): Unit = relationships = Nil
 }

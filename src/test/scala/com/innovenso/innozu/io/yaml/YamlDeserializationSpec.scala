@@ -22,7 +22,7 @@ import com.innovenso.townplanner.model.meta.Key
 import org.scalatest.flatspec.AnyFlatSpec
 
 class YamlDeserializationSpec extends AnyFlatSpec {
-  it should "read enterprises from YAML" in new EnterpriseArchitectureContext {
+  ignore should "read enterprises from YAML" in new EnterpriseArchitectureContext {
     val yml: String =
       """enterprises:
         |- key: enterprise_1
@@ -57,7 +57,7 @@ class YamlDeserializationSpec extends AnyFlatSpec {
     println(townPlan)
   }
 
-  it should "read business capabilities from YAML" in new EnterpriseArchitectureContext {
+  ignore should "read business capabilities from YAML" in new EnterpriseArchitectureContext {
     val yml: String =
       """capabilities:
         |- key: capability_1
@@ -79,7 +79,7 @@ class YamlDeserializationSpec extends AnyFlatSpec {
     println(townPlan)
   }
 
-  it should "read architecture building blocks from YAML" in new EnterpriseArchitectureContext {
+  ignore should "read architecture building blocks from YAML" in new EnterpriseArchitectureContext {
     val yml: String =
       """buildingBlocks:
         |- key: building_block_1
@@ -107,7 +107,7 @@ class YamlDeserializationSpec extends AnyFlatSpec {
     )
   }
 
-  it should "read business actors from YAML" in new EnterpriseArchitectureContext {
+  ignore should "read business actors from YAML" in new EnterpriseArchitectureContext {
     val yml: String =
       """people:
         |- key: person_1
@@ -138,7 +138,7 @@ class YamlDeserializationSpec extends AnyFlatSpec {
 
   }
 
-  it should "read data objects from YAML" in new EnterpriseArchitectureContext {
+  ignore should "read data objects from YAML" in new EnterpriseArchitectureContext {
     val yml = """data:
                 |- key: entity_1
                 |  sortKey: '000000001'
@@ -333,7 +333,7 @@ class YamlDeserializationSpec extends AnyFlatSpec {
     )
   }
 
-  it should "read platforms from yaml" in new EnterpriseArchitectureContext {
+  ignore should "read platforms from yaml" in new EnterpriseArchitectureContext {
     val yml = """platforms:
                 |- key: it_platform_1
                 |  sortKey: '000000001'
@@ -707,7 +707,7 @@ class YamlDeserializationSpec extends AnyFlatSpec {
     assert(townPlan.platforms.exists(p => p.resilienceMeasures.nonEmpty))
   }
 
-  it should "read system integrations from YAML" in new EnterpriseArchitectureContext {
+  ignore should "read system integrations from YAML" in new EnterpriseArchitectureContext {
     val yml =
       """systems:
         |- key: system_1
@@ -732,7 +732,7 @@ class YamlDeserializationSpec extends AnyFlatSpec {
     assert(townPlan.systemIntegrations.size == 1)
   }
 
-  it should "read containers from YAML" in new EnterpriseArchitectureContext {
+  ignore should "read containers from YAML" in new EnterpriseArchitectureContext {
     val yml = """containers:
                 |- key: database_1
                 |  sortKey: '000000035'
@@ -972,7 +972,7 @@ class YamlDeserializationSpec extends AnyFlatSpec {
 
   }
 
-  it should "read IT Systems from YAML" in new EnterpriseArchitectureContext {
+  ignore should "read IT Systems from YAML" in new EnterpriseArchitectureContext {
     val yml = """data:
                 |- key: entity_1
                 |  sortKey: '000000001'

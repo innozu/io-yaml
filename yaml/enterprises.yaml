@@ -1,59 +1,35 @@
 enterprises:
 - key: enterprise_1
   sortKey: '000000001'
-  title: Errem Molestiae
+  title: Urbanitas Referrentur
   description:
-  - fuisset adolescens penatibus vel graecis vidisse velit aliquet graecis nostrum
-    sem netus quas intellegat petentium facilisis inani civibus nihil definiebas mus
-    turpis facilis omittam impetus eloquentiam mattis dicunt legimus sagittis nonumy
-    nostra ponderum prodesset solet alia dico vim etiam consul maecenas alterum delenit
-    explicari intellegat nostra assueverit elaboraret errem elaboraret nominavi ius
-    minim ac litora
+  - cras verear aliquid duo posuere utamur prodesset metus animal delectus sanctus
+    facilisis civibus regione persius ferri
+  - inimicus consequat facilisis tamquam doctus invidunt error eripuit simul eius
+    primis dicant decore elitr sadipscing idque an tincidunt autem contentiones harum
+    cubilia gloriatur volumus suavitate ut rhoncus quod malorum ultrices vehicula
+    invenire doctus doctus conclusionemque adversarium vim mazim error ante
+  - decore non morbi ullamcorper dolore partiendo quo nostrum altera non ornare dolorum
+    amet hac te pharetra dolore platonem maximus posse sagittis appetere neglegentur
+    efficiantur fuisset has vitae ne malorum movet quam fuisset nascetur nostra mentitum
+    maiestatis putent cetero iudicabit ne quot urna vidisse oporteat equidem integer
+    nonumes vulputate malesuada esse per volumus urbanitas tale vituperatoribus similique
+    gubergren graeci senserit volumus habitasse quaerendum animal odio
   links:
-  - type: Website
-    url: http://www.bing.com/search?q=scelerisque
-    title: Percipit
-  - type: Website
-    url: https://duckduckgo.com/?q=repudiandae
-    title: Metus
-  - type: Website
-    url: https://www.google.com/#q=id
-    title: Sumo
+  - type: Production URL
+    url: https://duckduckgo.com/?q=diam
+    title: Facilisi
+  - type: Pre-Production URL
+    url: https://duckduckgo.com/?q=eripuit
+    title: Liber
+  - type: API Documentation
+    url: https://duckduckgo.com/?q=lectus
+    title: Offendit
   swot:
-    strengths:
-    - rutrum postulant ponderum malesuada definiebas docendi inani iriure convenire
-      nisl sale libris moderatius elementum viris reprehendunt reformidans consetetur
-      legere pharetra augue pertinacia voluptatibus sale dolor luctus elaboraret definiebas
-      tortor conclusionemque possit tota dico pericula commune platonem integer vivamus
-      venenatis in expetendis et aliquip populo expetendis errem efficiantur libero
-      possim quo graeco tellus vehicula wisi accumsan assueverit discere tincidunt
-      morbi rutrum equidem possit fabulas audire quem utamur epicuri alterum principes
-      graecis porta eget nihil litora justo falli constituam fames
-    - quaerendum porttitor suas suscipiantur sale odio detraxit sociis ei pri tritani
-      wisi vivamus deseruisse urna dui mus
-    weaknesses:
-    - quas option simul mel melius congue petentium disputationi maluisset graece
-      fusce pertinacia hac fastidii egestas accommodare conceptam nonumes taciti animal
-      suavitate oporteat sapien posidonium altera blandit principes vis docendi natoque
-      aliquid deserunt brute tempus pericula errem phasellus eos tractatos dicant
-      velit usu urna posuere deseruisse populo condimentum vestibulum adipiscing inani
-      electram urbanitas lobortis facilisis antiopam discere ubique mentitum aliquid
-      persius invenire moderatius definiebas patrioque
-    - necessitatibus hendrerit euripidis nihil euismod reformidans tempor reprimique
-      ius nonumy meliore dictas dictum pellentesque constituam pretium fames offendit
-      lorem meliore affert turpis ludus molestiae condimentum maximus no natum donec
-      repudiare mei ipsum reque pulvinar posuere consectetuer prompta appareat adolescens
-      vocent adversarium prodesset elit detraxit in interesset atomorum sea patrioque
-      praesent tristique interdum posidonium legere option consectetur malesuada laoreet
-    opportunities:
-    - sale principes erroribus aliquet recteque partiendo volumus ad nunc consul laoreet
-      an eros omittam accumsan tractatos liber
-    - latine tritani brute pertinax saepe appareat interpretaris neglegentur ridiculus
-      scripta dictum potenti electram quaerendum sadipscing blandit inceptos etiam
-      decore interesset voluptatibus alia fusce
     threats:
-    - mediocrem principes neglegentur persequeris vituperatoribus putent populo definitiones
-      at atqui maluisset delenit accumsan graeci saperet tortor perpetua eros nominavi
-      a docendi porttitor instructior epicuri salutatus invenire interesset vivendo
-      proin vix dicam at vocent indoctum dissentiunt vivamus primis altera donec vocibus
-      ultrices nihil lacinia cetero lacus euismod verear
+    - ligula veniam iisque iusto delenit quaeque mucius appareat qualisque scelerisque
+      scripserit inciderint integer posuere expetenda turpis leo numquam nonumes expetenda
+      libris ceteros semper postulant aperiri menandri neque explicari posidonium
+      scripserit salutatus quem diam maluisset oratio hac aliquet viris labores scripta
+      sem ridens consetetur sit eum nobis donec tamquam suscipit eripuit mi mazim
+      tamquam suscipiantur simul
