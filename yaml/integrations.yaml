@@ -1,6 +1,0 @@
-integrations:
-- key: integration_1
-  sortKey: '000000814'
-  system1: it_system_1
-  system2: it_system_2
-  title: System Integration
