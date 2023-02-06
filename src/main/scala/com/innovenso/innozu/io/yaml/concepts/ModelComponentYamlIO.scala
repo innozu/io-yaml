@@ -16,6 +16,7 @@ import com.innovenso.innozu.io.yaml.properties.{
   PlatformLayerPropertyYamlIO,
   ResilienceMeasureYamlIO,
   SWOTYamlIO,
+  SecurityMeasuresYamlIO,
   TagPropertyYamlIO,
   TitleYamlIO
 }
@@ -56,6 +57,7 @@ import com.innovenso.townplanner.model.concepts.properties.{
   HasPlatformLayerProperties,
   HasResilienceMeasures,
   HasSWOT,
+  HasSecurityMeasures,
   HasTagProperties,
   HasTitle
 }
@@ -162,6 +164,11 @@ trait ModelComponentYamlIO[ModelComponentType <: ModelComponent]
     modelComponent match {
       case hasResilienceMeasures: HasResilienceMeasures =>
         ResilienceMeasureYamlIO.write(hasResilienceMeasures, map)
+      case _ =>
+    }
+    modelComponent match {
+      case hasSecurityMeasures: HasSecurityMeasures =>
+        SecurityMeasuresYamlIO.write(hasSecurityMeasures, map)
       case _ =>
     }
     modelComponent match {

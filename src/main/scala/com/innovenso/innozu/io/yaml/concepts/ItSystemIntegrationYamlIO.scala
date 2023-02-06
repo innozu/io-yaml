@@ -48,6 +48,7 @@ object ItSystemIntegrationYamlIO
           .readMany(data)
           .foreach(fatherTime => it has fatherTime on fatherTime.date)
         ResilienceMeasureYamlIO.readMany(data).foreach(r => it provides r)
+        SecurityMeasuresYamlIO.readMany(data).foreach(s => it provides s)
         ThroughPutYamlIO.readVolume(data).foreach(it.has)
         ThroughPutYamlIO.readFrequency(data).foreach(it.has)
       }

@@ -28,6 +28,7 @@ object ItSystemYamlIO extends ModelComponentYamlIO[ItSystem] {
         .readMany(data)
         .foreach(fatherTime => it has fatherTime on fatherTime.date)
       ResilienceMeasureYamlIO.readMany(data).foreach(r => it provides r)
+      SecurityMeasuresYamlIO.readMany(data).foreach(s => it provides s)
       PlatformLayerPropertyYamlIO
         .readOne(data)
         .foreach(pl => it isOn pl.platformLayerKey)

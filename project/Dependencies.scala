@@ -30,7 +30,7 @@ object Dependencies {
   }
 
   object Innozu {
-    final val model = "com.innovenso" %% "innozu-model" % "1.7.0"
+    final val model = "com.innovenso" %% "innozu-model" % "1.8.0"
     final val * = Seq(model)
   }
 
