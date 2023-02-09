@@ -2,18 +2,7 @@ package com.innovenso.innozu.io.yaml.concepts
 
 import com.innovenso.innozu.io.yaml.properties._
 import com.innovenso.townplanner.model.EnterpriseArchitecture
-import com.innovenso.townplanner.model.concepts.{
-  AggregateRoot,
-  BusinessCapability,
-  Command,
-  DataObject,
-  DataObjectConfigurer,
-  Entity,
-  Event,
-  Projection,
-  Query,
-  ValueObject
-}
+import com.innovenso.townplanner.model.concepts.{AggregateRoot, BusinessCapability, Command, ConceptualDataObject, DataObject, DataObjectConfigurer, Entity, Event, Projection, Query, ValueObject}
 import com.innovenso.townplanner.model.language.ModelComponent
 import com.innovenso.townplanner.model.meta.{Key, SortKey}
 
@@ -52,7 +41,7 @@ object DataObjectYamlIO extends ModelComponentYamlIO[DataObject] {
       case e: Event          => ea describes e as { it => body.apply(it) }
       case q: Query          => ea describes q as { it => body.apply(it) }
       case p: Projection     => ea describes p as { it => body.apply(it) }
-      case _ => ea describes (Entity(key, sortKey)) as { it => body.apply(it) }
+      case _ => ea describes ConceptualDataObject(key, sortKey) as { it => body.apply(it) }
     }.get
   }
 
