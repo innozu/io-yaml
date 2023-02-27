@@ -15,6 +15,7 @@ object ItSystemIntegrationYamlIO
   ): Unit = {
     data.put("system1", modelComponent.source.value)
     data.put("system2", modelComponent.target.value)
+    data.put("dataObject", modelComponent.dataObject.value)
   }
 
   override def readOne(data: ItSystemIntegrationYamlIO.YamlJavaData, key: Key)(
@@ -28,11 +29,13 @@ object ItSystemIntegrationYamlIO
   ): Option[ItSystemIntegration] = for {
     system1Key <- readString(data, "system1").map(v => Key.fromString(v))
     system2Key <- readString(data, "system2").map(v => Key.fromString(v))
+    dataObjectKey <- readString(data, "dataObject").map(v => Key.fromString(v))
     integration <- Some(
       ea describes ItSystemIntegration(
         key = key,
         source = system1Key,
         target = system2Key,
+        dataObject = dataObjectKey,
         sortKey = readSortKey(data)
       ) as { it =>
         it has TitleYamlIO.read(data)
